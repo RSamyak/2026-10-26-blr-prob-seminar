@@ -1,0 +1,16 @@
+---
+description: Style reference for this deck - the B Math reunion talk.
+alwaysApply: true
+---
+
+# Reference talk
+
+Follow the style of https://github.com/RSamyak/2026-08-bmathreunion-talk (`slides.qmd`, `theme.scss`).  Different talk: copy the style, not the content.
+
+- Title slide: title, then stacked author lines (`name · affiliation`, `venue · date`).
+- A visual map of the talk's structure up front; each section opens on a coloured divider that recalls it.
+- Content slides: `{.content}` with the body in `::: {.cbody}`; short bullets in `{.incremental}`, sub-bullets for detail.
+- The punchline of a slide is a `[...]{.fragment .below-note}` line, revealed last.
+- One colour per section; its slides carry a tint and a corner label.
+- Close on a takeaway slide: one column per section, then thanks and contact.
+- Plain, wry wording.  Maths where it earns its place.

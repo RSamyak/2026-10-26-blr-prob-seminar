@@ -1,0 +1,14 @@
+Bangalore Probability Seminar
+
+Date: 2026-10-26
+
+Speaker: R Samyak
+PhD, Stanford Stats '23
+BMath, ISIBang '18
+
+Title: Experimentation at Scale: Challenges and Opportunities in A/B Testing, from Industry
+
+Abstract:
+Large tech companies run thousands of experiments at any time, using sophisticated systems that demand expertise in both software engineering and mathematical theory—but the bridge between the industry and academic worlds remains weak.  There are unique challenges that arise in production-grade implementations of experimentation (A/B testing) platforms where even a 1% improvement in a given metric can mean millions of dollars to the bottom line.  In this talk, we will discuss three specific questions formulated mathematically, some initial attempts to address these inside industry, and gaps that demand greater attention and research: (1) how to formalise the tradeoff between making the best decision slowly versus a decent decision quickly, (2) how to determine how many and what sort of hypotheses one can test under the constraint of limited overall sample size, and (3) how to robustly measure and calibrate performance of testing methodologies, in the presence of model misspecification and unmeasured confounders.
+
+Keywords: multiple testing, speed vs accuracy, sequential analysis, robustness

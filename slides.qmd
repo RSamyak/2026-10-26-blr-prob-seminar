@@ -1,0 +1,5 @@
+---
+title: "Experimentation at Scale: Challenges and Opportunities in A/B Testing, from Industry"
+author: "R Samyak"
+date: "2026-10-26"
+---

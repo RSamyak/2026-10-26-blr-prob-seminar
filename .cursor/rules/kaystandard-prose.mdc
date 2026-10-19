@@ -1,0 +1,14 @@
+---
+description: KayStandard prose.md, mirrored from https://github.com/RSamyak/kaystandard (main). Do not edit; re-copy from source.
+alwaysApply: true
+---
+
+# Prose
+
+Omit needless words. Every word earns its place.
+
+## Writing style
+- Indian English. When ambiguous, UK spelling over US.
+- Two spaces after full stop.
+- Use Oxford comma.
+- If applicable, follow RFC 2119.

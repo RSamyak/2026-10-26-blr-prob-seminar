@@ -1,0 +1,23 @@
+---
+description: KayStandard code.md, mirrored from https://github.com/RSamyak/kaystandard (main). Do not edit; re-copy from source.
+alwaysApply: true
+---
+
+# Code
+
+Applies to code. `repos.md` also applies.
+
+## Stack
+
+Python preferred. R when necessary.
+
+## Dependencies
+
+- Project-local. Do not install system-wide when a local environment is available.
+- Python: one `.venv/`. `requirements.txt` is its full `pip freeze`.
+
+## Principles
+
+- A module does not require an unrelated module. Its interface, logic, and records sit behind an explicit boundary.
+- Records stay apart from the program that reads them.
+- Core code is cross-platform. Platform-specific work stays in thin adapters.

@@ -1,0 +1,33 @@
+---
+description: KayStandard repos.md, mirrored from https://github.com/RSamyak/kaystandard (main). Do not edit; re-copy from source.
+alwaysApply: true
+---
+
+# Repos
+
+Applies to every repo.
+
+## Principles
+
+- One source of truth for each fact. No copies. Mirrors are derived from the source, never edited.
+- Minimal surface: fewest files, settings, and words that work.
+- Self-contained. A template of this standard is part of it. No other outside dependency.
+- No debris outside the repo unless explicitly allowed. Inside, debris only in `dump/`, including tool caches.
+- Ordinary use offline. Network only to restore dependencies, or where the feature itself needs it.
+- git. HTML for anything rendered.
+
+## Track
+
+- Authored source, durable records, dependency declarations, lockfiles, and declared deliverables.
+- `scratch/`: tracked working material. Nothing outside it depends on anything inside it. Purging it leaves the rest unchanged. `scratch/README.md` states this.
+- `scripts/`: repo-owned automation.
+
+## Ignore
+
+- Installed dependencies, environments, external binaries, caches, intermediates, and reproducible build output.
+- Declared deliverables are the exception.
+- `dump/`: all disposable work.
+- `tools/`: external binaries. Track the versions, checksums, configuration, and scripts needed to restore them.
+- Add a line only for a file this repo makes. No stock template.
+
+Do not use `.work/` or `dump/gitignored/`. Both are `dump/`.
