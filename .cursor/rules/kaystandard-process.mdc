@@ -1,5 +1,5 @@
 ---
-description: KayStandard process.md, mirrored from https://github.com/RSamyak/kaystandard (main). Do not edit; re-copy from source.
+description: KayStandard process.md, with a project-local planning convention.
 alwaysApply: true
 ---
 
@@ -19,3 +19,7 @@ Applies during development. `repos.md` also applies.
 - No needless complexity. No unnecessary frugality. Balance.
 
 Above all, write beautiful, elegant code. Something that would make you smile, and brings joy to the world.
+
+## Planning
+
+"Let's plan" means work in `scratch/`, in markdown (`scratch/plan.md`).  Iterate until the plan is finished before building the deck.

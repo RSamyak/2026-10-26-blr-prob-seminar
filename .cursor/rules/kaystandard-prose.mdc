@@ -1,5 +1,5 @@
 ---
-description: KayStandard prose.md, mirrored from https://github.com/RSamyak/kaystandard (main). Do not edit; re-copy from source.
+description: KayStandard prose.md, with a project-local addition pending upstream.
 alwaysApply: true
 ---
 
@@ -11,4 +11,5 @@ Omit needless words. Every word earns its place.
 - Indian English. When ambiguous, UK spelling over US.
 - Two spaces after full stop.
 - Use Oxford comma.
+- Prefer full names to surnames alone.
 - If applicable, follow RFC 2119.

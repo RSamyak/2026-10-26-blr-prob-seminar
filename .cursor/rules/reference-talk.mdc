@@ -7,6 +7,8 @@ alwaysApply: true
 
 Follow the style of https://github.com/RSamyak/2026-08-bmathreunion-talk (`slides.qmd`, `theme.scss`).  Different talk: copy the style, not the content.
 
+When in doubt, look at that talk and match its layout, structure, and style.
+
 - Title slide: title, then stacked author lines (`name · affiliation`, `venue · date`).
 - A visual map of the talk's structure up front; each section opens on a coloured divider that recalls it.
 - Content slides: `{.content}` with the body in `::: {.cbody}`; short bullets in `{.incremental}`, sub-bullets for detail.
