@@ -4,7 +4,7 @@ project:
 
 format:
   revealjs:
-    theme: [default, theme.scss]
+    theme: [default, theme.scss, sections/_intro.scss, sections/_p1.scss, sections/_p2.scss, sections/_p3.scss]
     width: 1280
     height: 720
     slide-number: c/t
@@ -14,7 +14,7 @@ format:
     menu: true
     overview: true
     embed-resources: true
-    math: false
+    html-math-method: katex
     auto-stretch: false
     highlight-style: github
     fig-align: center

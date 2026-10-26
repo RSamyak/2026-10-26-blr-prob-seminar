@@ -1,0 +1,157 @@
+/*-- scss:rules --*/
+
+// --- the industrial A/B test: one chevron per stage, the estimate in full navy ---
+.reveal .intro-pipeline {
+  display: flex;
+  width: 98%;
+  margin: 0 auto;
+}
+.reveal .intro-pipeline .step {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35em;
+  min-height: 5.4em;
+  margin-left: -18px;
+  padding: 0.5em 0.6em 0.5em 1.1em;
+  background: #6b78a0;
+  color: #ffffff;
+  font-size: 0.7em;
+  line-height: 1.15;
+  text-align: center;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%);
+}
+.reveal .intro-pipeline .step:first-child {
+  margin-left: 0;
+  padding-left: 0.6em;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
+}
+.reveal .intro-pipeline .step.est { background: $sec0; }
+.reveal .intro-pipeline .lbl { font-weight: 700; white-space: nowrap; }
+.reveal .intro-pipeline .gl { font-size: 0.78em; opacity: 0.92; }
+
+// --- tables: sample sizes, and textbook against scale ---
+.reveal .intro-table {
+  margin: 0.5em auto 0;
+  border-collapse: collapse;
+  font-size: 0.78em;
+}
+.reveal .intro-table th,
+.reveal .intro-table td {
+  padding: 0.3em 0.9em;
+  border-bottom: 1px solid rgba($sec0, 0.2);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.3;
+}
+.reveal .intro-table th {
+  color: $sec0;
+  border-bottom: 2px solid $sec0;
+}
+.reveal .intro-table td:first-child { color: #5b626e; }
+.reveal .intro-table.sizes th,
+.reveal .intro-table.sizes td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.reveal .intro-table.sizes tr:last-child td {
+  color: $sec0;
+  font-weight: 700;
+}
+.reveal .intro-table.contrast { width: 90%; }
+.reveal .intro-table.contrast td:first-child { width: 36%; }
+
+// --- three questions, in the three problem colours ---
+.reveal .intro-questions {
+  display: flex;
+  gap: 1em;
+  width: 92%;
+  margin: 0 auto;
+}
+.reveal .intro-questions .q {
+  flex: 1 1 0;
+  padding: 0.8em 0.9em;
+  border-radius: 12px;
+  color: #ffffff;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(22, 33, 62, 0.18);
+}
+.reveal .intro-questions .q1 { background: $sec1; }
+.reveal .intro-questions .q2 { background: $sec2; }
+.reveal .intro-questions .q3 { background: $sec3; }
+.reveal .intro-questions .qn {
+  font-size: 0.55em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.reveal .intro-questions .qname {
+  margin: 0.15em 0 0.6em;
+  padding-bottom: 0.45em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.72em;
+  font-weight: 700;
+}
+.reveal .intro-questions .qt {
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+// Running example.  .ab-person, .ab-coin, .ab-page, and .ab-paid
+// are the pieces later slides can call back.
+.reveal section.ab-hero .cbody { top: 56%; }
+.reveal .ab-scene {
+  display: block;
+  width: 96%;
+  height: auto;
+  margin: 0 auto;
+}
+
+// Two rows of platforms.  Logos where a clean mark exists; a name otherwise.
+.reveal .plat-board { width: 94%; margin: 0 auto; }
+.reveal .plat-group { margin: 0.15em 0 1.15em; }
+.reveal .plat-label {
+  margin: 0 0 0.55em;
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a8f9a;
+}
+.reveal .plat-label span {
+  margin-left: 0.55em;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #5b626e;
+}
+.reveal .plat-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.7em;
+}
+.reveal .plat {
+  width: 132px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.75em 0.35em 0.55em;
+  text-align: center;
+}
+.reveal .plat img {
+  display: block;
+  height: 36px;
+  width: 96px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+.reveal .plat img.mark { height: 18px; }
+.reveal .plat span {
+  display: block;
+  margin-top: 0.4em;
+  font-size: 0.58em;
+  font-weight: 600;
+  color: #16213e;
+}

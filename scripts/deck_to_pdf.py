@@ -6,6 +6,9 @@ Each page is a vector print of that screen.
 
 Usage:
   .venv/bin/python scripts/deck_to_pdf.py _output/slides.html "<title>.pdf" [extra_seconds]
+
+Add --one-page-per-slide (any position) to print one page per slide, with
+every fragment on it already revealed, instead of one page per click.
 """
 
 from __future__ import annotations
@@ -94,10 +97,15 @@ def free_port():
         return sock.getsockname()[1]
 
 
+ONE_PAGE_FLAG = "--one-page-per-slide"
+
+
 def main():
-    html = os.path.abspath(sys.argv[1])
-    out = os.path.abspath(sys.argv[2])
-    extra = float(sys.argv[3]) if len(sys.argv) > 3 else 0.0
+    args = [a for a in sys.argv[1:] if a != ONE_PAGE_FLAG]
+    one_page_per_slide = ONE_PAGE_FLAG in sys.argv[1:]
+    html = os.path.abspath(args[0])
+    out = os.path.abspath(args[1])
+    extra = float(args[2]) if len(args) > 2 else 0.0
     chrome = find_chrome()
     port = free_port()
     out_dir = os.path.dirname(out)
@@ -187,7 +195,7 @@ def main():
         def state():
             return evaluate("JSON.stringify(Reveal.getState())")
 
-        for _ in range(MAX_STEPS):
+        def print_current_page():
             printed = call("Page.printToPDF", {
                 "printBackground": True,
                 "displayHeaderFooter": False,
@@ -206,17 +214,40 @@ def main():
             page = document.new_page(width=DECK_W, height=DECK_H)
             page.show_pdf_page(pymupdf.Rect(0, 0, DECK_W, DECK_H), page_pdf, 0)
             page_pdf.close()
-            page_count += 1
 
-            before = state()
-            evaluate(ADVANCE, await_promise=True)
-            deadline = time.time() + 2
-            while state() == before and time.time() < deadline:
-                time.sleep(0.05)
-            if state() == before:
-                break
-            if extra:
-                time.sleep(extra)
+        if one_page_per_slide:
+            total = evaluate("Reveal.getTotalSlides()")
+            for i in range(total):
+                evaluate(
+                    f"""
+                    (async () => {{
+                      Reveal.slide({i}, 0, 0);
+                      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+                      document.querySelectorAll('.fragment').forEach((el) => el.classList.add('visible'));
+                      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+                      return true;
+                    }})()
+                    """,
+                    await_promise=True,
+                )
+                print_current_page()
+                page_count += 1
+                if extra:
+                    time.sleep(extra)
+        else:
+            for _ in range(MAX_STEPS):
+                print_current_page()
+                page_count += 1
+
+                before = state()
+                evaluate(ADVANCE, await_promise=True)
+                deadline = time.time() + 2
+                while state() == before and time.time() < deadline:
+                    time.sleep(0.05)
+                if state() == before:
+                    break
+                if extra:
+                    time.sleep(extra)
 
         ws.close()
         document.save(out, garbage=4, deflate=True)

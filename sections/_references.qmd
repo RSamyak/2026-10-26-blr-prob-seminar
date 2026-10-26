@@ -1,0 +1,89 @@
+## References {.content .references}
+
+::: {.cbody}
+- Isaiah Andrews and Maximilian Kasy, 2019.  *American Economic Review*.
+- Kenneth Arrow, David Blackwell, and Meyer Girshick, 1949.  *Econometrica*.
+- Eduardo Azevedo, Alex Deng, José Luis Montiel Olea, Justin Rao, and E. Glen Weyl, 2020.  *Journal of Political Economy*.  (Fat tails.)
+- Yoav Benjamini and Yosef Hochberg, 1995.  *JRSS B*.
+- James Berger, 1985.  *Statistical Decision Theory and Bayesian Analysis*.  Springer.  ($\Gamma$-minimax.)
+- Roger Berger, 1982.  Multiparameter hypothesis testing and acceptance sampling.  *Technometrics*.
+- Frank Bretz, Willi Maurer, Werner Brannath, and Martin Posch, 2009.  *Statistics in Medicine*.
+- Herman Chernoff, 1961.  *Fourth Berkeley Symposium*.
+- Herman Chernoff, 1965.  Sequential Test for the Mean of a Normal Distribution III (Small $t$).  *Annals of Mathematical Statistics*.  (Best SPRT against Bayes, for one prior.)
+- Thomas Crook, Brian Frasca, Ron Kohavi, and Roger Longbotham, 2009.  Seven pitfalls to avoid when running controlled experiments on the web.  KDD.
+- George Dantzig, 1957.  Discrete-variable extremum problems.  *Operations Research*.
+- Jacqueline Doremus, Joel Persson, Brian St. Thomas, Carlos A. Flores, Sebastian Ankargren, Mårten Schultzberg, and Kyle Kretschman, 2026.  Return-aware platform experimentation: new directions for research.  *Marketing Letters*.
+- Bradley Efron, 2016.  Empirical Bayes deconvolution estimates.  *Biometrika*.
+- Ignacio Esponda and Demian Pouzo, 2016.  Berk–Nash equilibrium: a framework for modeling agents with misspecified models.  *Econometrica*.
+:::
+
+::: {.notes}
+Read on request.  Not part of the talk.
+:::
+
+## References {.content .references}
+
+::: {.cbody}
+- Aleksander Fabijan et al., 2019.  Diagnosing sample ratio mismatch in online controlled experiments.  KDD.
+- Elea McDonnell Feit and Ron Berman, 2019.  Test & Roll: Profit-Maximizing A/B Tests.  *Marketing Science*.  (One idea.)
+- Ronald Fisher, 1935.  *The Design of Experiments*.
+- Dean Foster and Robert Stine, 2008.  *JRSS B*.
+- Somit Gupta et al., 2018.  The Anatomy of a Large-Scale Online Experimentation Platform.  ICSA.
+- Sture Holm, 1979.  *Scandinavian Journal of Statistics*.
+- Steven Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, 2021.  Time-uniform, nonparametric, nonasymptotic confidence sequences.  *Annals of Statistics*.
+- Peter Huber, 1964.  Robust estimation of a location parameter.  *Annals of Mathematical Statistics*.
+- Adel Javanmard and Andrea Montanari, 2018.  *Annals of Statistics*.
+- Ramesh Johari, Pete Koomen, Leonid Pekelis, and David Walsh, 2022.  Always Valid Inference: Continuous Monitoring of A/B Tests.  *Operations Research*.
+- Ron Kohavi, Alex Deng, Brian Frasca, Toby Walker, Ya Xu, and Nils Pohlmann, 2013.  Online controlled experiments at large scale.  KDD.
+- Ron Kohavi, Alex Deng, Roger Longbotham, and Ya Xu, 2014.  Seven rules of thumb for web site experimenters.  KDD.
+- Ron Kohavi and Stefan Thomke, 2017.  The Surprising Power of Online Experiments.  *Harvard Business Review*.
+:::
+
+::: {.notes}
+Read on request.  Not part of the talk.
+:::
+
+## References {.content .references}
+
+::: {.cbody}
+- Ron Kohavi, Diane Tang, and Ya Xu, 2020.  *Trustworthy Online Controlled Experiments*.
+- Ron Kohavi, Alex Deng, and Lukas Vermeer, 2022.  A/B testing intuition busters.  KDD.
+- Nicholas Larsen et al., 2024.  *The American Statistician*.  (Worked example.)
+- Robert Lehr, 1992.  Sixteen S-squared over D-squared: a relation for crude sample size estimates.  *Statistics in Medicine*.
+- Michael Lindon and Alan Malek, 2022.  Anytime-valid inference for multinomial count data.  NeurIPS.  (An anytime-valid sample-ratio test.)
+- C. H. Bryan Liu, Ângelo Cardoso, Paul Couturier, and Emma McCoy, 2021.  Datasets for online controlled experiments.  NeurIPS Datasets and Benchmarks.
+- Charles Manski, 2003.  *Partial Identification of Probability Distributions*.  Springer.
+- J. Nathan Matias, Kevin Munger, Marianne Aubin Le Quere, and Charles Ebersole, 2021, corrected 2024.  The Upworthy Research Archive, a time series of 32,487 experiments in U.S. media.  *Scientific Data*.
+- Kari Lock Morgan and Donald Rubin, 2012.  Rerandomization to improve covariate balance in experiments.  *Annals of Statistics*.
+- Jerzy Neyman, 1923.  On the application of probability theory to agricultural experiments.  Essay on principles.
+- Jerzy Neyman and Egon Pearson, 1933.
+- Howard Raiffa and Robert Schlaifer, 1961.  *Applied Statistical Decision Theory*.
+- Herbert Robbins, 1956.  An empirical Bayes approach to statistics.  *Third Berkeley Symposium*.
+- Donald Rubin, 1974.  Estimating causal effects of treatments in randomized and nonrandomized studies.  *Journal of Educational Psychology*.
+- Sven Schmit, Virag Shah, and Ramesh Johari, 2019.  Optimal testing in the experiment-rich regime.  AISTATS.
+:::
+
+::: {.notes}
+Read on request.  Not part of the talk.
+:::
+
+## References {.content .references}
+
+::: {.cbody}
+- David Schott, 2018.  Double-bucketing in A/B Testing.  Etsy Code as Craft.
+- Mårten Schultzberg, Sebastian Ankargren, and Mattias Frånberg, 2026.  Risk-aware product decisions in A/B tests with multiple metrics.  *Journal of Statistical Planning and Inference*.
+- Mårten Schultzberg and Mattias Frånberg, 2026.  arXiv.  (Priors that fail to calibrate.)
+- Charles Stein, 1956.  Inadmissibility of the usual estimator for the mean of a multivariate normal distribution.  *Third Berkeley Symposium*.
+- Chris Stucchio, 2015.  VWO SmartStats white paper.
+- Timothy Sudijono, Simon Ejdemyr, Apoorva Lal, and Martin Tingley, 2025.  Optimizing returns from experimentation programs.  EC '25.
+- Mack Sweeney, Matthew van Adelsberg, Kathryn Laskey, and Carlotta Domeniconi, 2020.  ICDM.
+- Diane Tang, Ashish Agarwal, Deirdre O'Brien, and Mike Meyer, 2010.  KDD.
+- Vendor documentation, checked October 2026.
+- Abraham Wald, 1945.
+- Abraham Wald and Jacob Wolfowitz, 1948.  *Annals of Mathematical Statistics*.
+- Zhenyu Zhao and Eva Feng, 2017.  Building an intelligent experimentation platform with Uber Engineering.  Uber Engineering blog.
+:::
+
+::: {.notes}
+Read on request.  Not part of the talk.
+:::

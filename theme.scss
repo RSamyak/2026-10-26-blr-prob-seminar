@@ -18,6 +18,17 @@ $presentation-h1-font-size: 1.9em;
 $presentation-h2-font-size: 1.3em;
 $presentation-h3-font-size: 1.05em;
 
+// Intro, then one colour per problem.  Fresh hues, distinct from the
+// B Math reunion talk's green / blue / red triad.
+$sec0: #243056; // Intro
+$sec1: #b8860b; // Problem 1 — fast vs right (amber)
+$sec2: #157a73; // Problem 2 — how many hypotheses (teal)
+$sec3: #6a4c93; // Problem 3 — measuring the methods (violet)
+$sec0-tint: #e4e7ef;
+$sec1-tint: #f3e3c1;
+$sec2-tint: #cdeae7;
+$sec3-tint: #e4dbee;
+
 /*-- scss:rules --*/
 
 .reveal .slide-number {
@@ -30,5 +41,399 @@ $presentation-h3-font-size: 1.05em;
   border-bottom: 2px solid #e3e6ec;
   padding-bottom: 0.15em;
 }
-
 .reveal h2:empty { display: none; }
+
+.reveal #title-slide h1 { color: $presentation-heading-color; }
+.reveal #title-slide h1 .title-sub {
+  display: block;
+  margin-top: 0.35em;
+  font-size: 0.58em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+// title slide: stack the author lines (name · affiliation, venue · date)
+.reveal .quarto-title-authors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1em;
+}
+.reveal .quarto-title-author { width: auto; }
+
+// --- regular content slides: title at top, body vertically centred ---
+// Absolutely positioned so screen and ?print-pdf output match exactly.
+.reveal section.content > h2 {
+  margin: 0 0 0.7em;
+}
+.reveal section.content .cbody {
+  position: absolute;
+  top: 52%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+.reveal section.funding .cbody {
+  top: 4.4em;
+  transform: none;
+}
+// Tall slides: nudge the centred body down, and tighten it so the title and the corner label stay clear.
+.reveal section.fit .cbody { top: 55%; }
+.reveal section.fit .cbody ul,
+.reveal section.fit .cbody ol { line-height: 1.45; }
+.reveal section.fit .cbody li { margin: 0.4em 0; }
+.reveal section.fit .cbody .below-note { margin-top: 0.7em; }
+.reveal section.fit .cbody .cite { margin-top: 0.55em; }
+.reveal section.fit .p1-fig { width: 720px; }
+.reveal section.fit .p1-caption + .below-note { padding-left: 5em; padding-right: 5em; }
+.reveal section.fit .p1-validity-fig { width: 560px; }
+.reveal section.fit .p3-lead { margin-bottom: 0.35em; }
+.reveal section.clear .cbody .below-note {
+  margin-top: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 13em;
+}
+.reveal .funding-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4em;
+}
+.reveal .funding-grid img {
+  display: block;
+  width: 100%;
+  height: 248px;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid #e3e6ec;
+  background: #fff;
+}
+.reveal section.content .cbody ul,
+.reveal section.content .cbody ol {
+  margin-left: 1.4em;
+  line-height: 1.7;
+}
+.reveal section.content .cbody li { margin: 0.68em 0; }
+.reveal section.content .cbody ul ul {
+  margin-left: 1.6em;
+  margin-top: 0.4em;
+}
+.reveal section.content .cbody ul ul li { margin: 0.3em 0; }
+
+// centred punchline line(s) below a content list
+.reveal section.content .cbody .below-note {
+  display: block;
+  text-align: center;
+  margin-top: 1.1em;
+  font-style: italic;
+  color: #5b626e;
+  font-size: 0.9em;
+}
+.reveal section.content .cbody .below-note + .below-note {
+  margin-top: 0.15em;
+}
+// Disclaimer: heading and sentence are one centred block.
+.reveal section.disclaimer > h2 {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  transform: translateY(calc(-100% - 0.4em));
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+  text-align: center;
+}
+.reveal section.disclaimer > p {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  margin: 0;
+  text-align: center;
+  font-size: 0.92em;
+  line-height: 1.45;
+  color: #1b1f2a;
+}
+
+// citation line under a content slide's body
+.reveal section.content .cbody .cite {
+  display: block;
+  margin-top: 1em;
+  font-size: 0.55em;
+  line-height: 1.35;
+  color: #6b7280;
+}
+
+// Dark section-divider slides: force light text.
+.reveal section.has-dark-background h1,
+.reveal section.has-dark-background h2,
+.reveal section.has-dark-background p,
+.reveal section.has-dark-background li,
+.reveal section.has-dark-background strong { color: #ffffff; }
+.reveal section.has-dark-background h2 { border-bottom-color: rgba(255,255,255,0.35); }
+
+// ============================================================
+// Map: intro on its own, then three parallel lanes.
+// ============================================================
+.reveal .talkmap {
+  width: 76%;
+  margin: 0 auto;
+  text-align: center;
+}
+.reveal .talkmap > .lane0 { margin: 0 0 0.75em; }
+.reveal .lanes {
+  display: flex;
+  gap: 1.2em;
+  width: 100%;
+  margin: 0;
+}
+.reveal section.agenda { text-align: center; }
+.reveal section.agenda > h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+.reveal section.agenda .agenda-wrap {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+}
+.reveal section.agenda .agenda-title {
+  margin: 0 0 0.35em;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #16213e;
+}
+.reveal section.agenda .agenda-line,
+.reveal section.agenda .agenda-note {
+  text-align: center;
+  font-style: italic;
+  color: #5b626e;
+  font-size: 0.85em;
+}
+.reveal section.agenda .agenda-line { margin: 0 0 0.9em; }
+.reveal section.agenda .agenda-note { margin: 0.9em 0 0; }
+.reveal .talkmap .lane {
+  flex: 1 1 0;
+  border-radius: 12px;
+  padding: 1.1em 1em;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(22, 33, 62, 0.18);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.reveal .talkmap .lane-num {
+  display: block;
+  font-size: 0.7em;
+  opacity: 0.8;
+  margin-bottom: 0.3em;
+}
+.reveal .talkmap .lane-q { font-size: 1.05em; line-height: 1.25; }
+.reveal .lane0 { background: $sec0; }
+.reveal .lanes .lane1 { background: $sec1; }
+.reveal .lanes .lane2 { background: $sec2; }
+.reveal .lanes .lane3 { background: $sec3; }
+
+// highlight one part (section-header callback): dim the rest
+.reveal .talkmap[class*="hl"] .lane { opacity: 0.32; filter: grayscale(0.25); }
+.reveal .talkmap.hl0 > .lane0,
+.reveal .talkmap.hl1 .lane1,
+.reveal .talkmap.hl2 .lane2,
+.reveal .talkmap.hl3 .lane3 {
+  opacity: 1;
+  filter: none;
+  outline: 4px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+.reveal .talkmap.hl1 .lane1,
+.reveal .talkmap.hl2 .lane2,
+.reveal .talkmap.hl3 .lane3 { transform: scale(1.06); }
+
+// section-header (divider) slides: no title — the highlighted lane alone
+// names the section.
+.reveal section.sechead h2 { display: none; }
+.reveal section.sechead .talkmap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 78%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+.reveal section.sechead .talkmap.hl0 > .lane0 .lane-q,
+.reveal section.sechead .talkmap.hl1 .lane1 .lane-q,
+.reveal section.sechead .talkmap.hl2 .lane2 .lane-q,
+.reveal section.sechead .talkmap.hl3 .lane3 .lane-q {
+  font-size: 1.3em;
+}
+
+// Inline status chip: [Unanswered:]{.unanswered}
+.reveal .unanswered {
+  display: inline-block;
+  margin-right: 0.4em;
+  padding: 0.04em 0.5em 0.08em;
+  border: 1.5px solid #16213e;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #16213e;
+  font-family: $font-family-sans-serif;
+  font-size: 0.72em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  vertical-align: 0.12em;
+  white-space: nowrap;
+}
+
+// --- per-section content slides: tinted background + corner label ---
+// Set the tint via the slide attribute, e.g. {background-color="#f3e3c1" .sec1}
+.reveal section.sec0::after,
+.reveal section.sec1::after,
+.reveal section.sec2::after,
+.reveal section.sec3::after {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  font-size: 0.58em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 5px 16px;
+  border-radius: 999px;
+}
+.reveal section.sec0::after { content: "Intro"; background: $sec0; }
+.reveal section.sec1::after { content: "Speed · Accuracy"; background: $sec1; }
+.reveal section.sec2::after { content: "Multiplicity · Portfolio"; background: $sec2; }
+.reveal section.sec3::after { content: "Robustness · Trust"; background: $sec3; }
+
+// --- takeaway: section names under the thanks ---
+.reveal section.takeaway-slide > h2 { display: none; }
+.reveal section.takeaway-slide {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 6%;
+  box-sizing: border-box;
+}
+.reveal section.takeaway-slide .thanks-block { margin-bottom: 2.4em; }
+.reveal .takeaway { display: flex; gap: 1.2em; margin-top: 0.4em; }
+.reveal section.takeaway-slide .takeaway { margin-top: 0; }
+.reveal section.takeaway-slide .takeaway .col { text-align: center; padding-top: 0; border-top: none; }
+.reveal section.takeaway-slide .takeaway .col .col-title {
+  display: inline-block;
+  font-size: 1.15em;
+  margin: 0;
+  white-space: nowrap;
+  border-top: 6px solid currentColor;
+  padding-top: 0.45em;
+}
+.reveal section.takeaway-slide .takeaway-close {
+  display: block;
+  margin: 1.5em 0 0;
+  text-align: center;
+  font-size: 0.78em;
+  white-space: nowrap;
+  color: #16213e;
+}
+.reveal .takeaway .col {
+  flex: 1 1 0;
+  border-top: 6px solid #ccc;
+  padding-top: 0.5em;
+  font-size: 0.92em;
+}
+.reveal .takeaway .col.c1 { border-color: $sec1; }
+.reveal .takeaway .col.c2 { border-color: $sec2; }
+.reveal .takeaway .col.c3 { border-color: $sec3; }
+.reveal .takeaway .col .col-title {
+  display: block;
+  font-weight: 700;
+  font-size: 1.08em;
+  margin: 0 0 0.4em;
+}
+.reveal .takeaway .col.c1 .col-title { color: $sec1; }
+.reveal .takeaway .col.c2 .col-title { color: $sec2; }
+.reveal .takeaway .col.c3 .col-title { color: $sec3; }
+.reveal .takeaway .col ul { margin: 0; padding-left: 1.05em; }
+.reveal .takeaway .col li { margin: 0.32em 0; line-height: 1.3; }
+
+// --- closing slide: thank-you + contact + QR header block ---
+.reveal .tk-footnote {
+  position: absolute;
+  bottom: 3.5%;
+  left: 0;
+  right: 0;
+  font-size: 0.72em;
+  font-style: italic;
+  color: #8a8f9a;
+  text-align: left;
+}
+.reveal .thanks-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5em;
+  margin: 0 0 0.7em;
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid #e3e6ec;
+}
+.reveal .thanks-text { text-align: left; }
+.reveal .thanks-line {
+  display: block;
+  font-size: 0.82em;
+  font-weight: 600;
+  color: #16213e;
+  line-height: 1.3;
+}
+.reveal .contact-line {
+  display: block;
+  margin-top: 0.55em;
+  font-size: 0.9em;
+  font-weight: 700;
+  color: #16213e;
+  line-height: 1.3;
+}
+.reveal .thanks-qr-block {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reveal .thanks-qr-block p { margin: 0; }
+.reveal .qr-label {
+  display: block;
+  margin-bottom: 0.1em;
+  font-size: 0.55em;
+  color: #5b626e;
+}
+.reveal img.thanks-qr {
+  width: 130px;
+  height: 130px;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+// references: a compact list, no bullets, hanging indent
+.reveal section.references .cbody ul {
+  list-style: none;
+  margin-left: 0;
+  font-size: 0.58em;
+  line-height: 1.3;
+}
+.reveal section.references .cbody li {
+  margin: 0.45em 0;
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}

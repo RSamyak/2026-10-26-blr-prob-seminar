@@ -1,5 +1,44 @@
 ---
-title: "Experimentation at Scale: Challenges and Opportunities in A/B Testing, from Industry"
-author: "R Samyak"
-date: "2026-10-26"
+title: 'Experimentation at Scale<br><span class="title-sub">Challenges and Opportunities in A/B Testing</span>'
+author:
+  - "R Samyak"
+  - "Bangalore Probability Seminar &middot; 26 Oct 2026"
 ---
+
+## Disclaimer {.disclaimer}
+
+Views expressed in this seminar are the speaker's own, and do not necessarily represent any employer, past or present.
+
+## Outline {.agenda}
+
+<div class="agenda-wrap">
+<p class="agenda-title">Outline</p>
+<p class="agenda-line">Not a results talk, but an invitation.</p>
+<div class="talkmap">
+  <div class="lane lane0 fragment" data-fragment-index="1"><div class="lane-num">Intro</div><div class="lane-q">A/B testing platforms</div></div>
+  <div class="lanes fragment" data-fragment-index="2">
+  <div class="lane lane1"><div class="lane-num">Problem 1</div><div class="lane-q">Speed vs accuracy</div></div>
+  <div class="lane lane2"><div class="lane-num">Problem 2</div><div class="lane-q">How many hypotheses</div></div>
+  <div class="lane lane3"><div class="lane-num">Problem 3</div><div class="lane-q">Measuring the methods</div></div>
+  </div>
+</div>
+<p class="agenda-note fragment" data-fragment-index="3">Industry has (ill-posed, open) problems, data, funding; Need expertise from academia</p>
+</div>
+
+::: {.notes}
+Not a results talk, but an invitation.  [click] First, what an A/B testing platform is, and why the effects are so small.  [click] Then three problems.  For each: a formulation, the classical theory under it, what industry does, and what is left open.  Where I say "open", read "open as far as I know".  [click] Industry has (ill-posed, open) problems, data, funding; Need expertise from academia
+:::
+
+{{< include sections/_intro.qmd >}}
+
+{{< include sections/_p1.qmd >}}
+
+{{< include sections/_p2.qmd >}}
+
+{{< include sections/_p3.qmd >}}
+
+{{< include sections/_close.qmd >}}
+
+{{< include sections/_references.qmd >}}
+
+{{< include sections/_appendix.qmd >}}

@@ -1,0 +1,178 @@
+/*-- scss:rules --*/
+
+// Problem 3.  Every rule is scoped to the section's slides (.sec3).
+
+// The section's question, asked of the running example.
+.reveal section.sec3 .cbody .p3-lead {
+  display: block;
+  margin: 0 auto 0.7em;
+  text-align: center;
+  font-size: 0.8em;
+  font-style: italic;
+  color: $sec3;
+}
+
+// --- false-positive bars: the track spans 0 to 50% ---
+.reveal section.sec3 .p3-bars {
+  width: 88%;
+  margin: 0.9em auto 0;
+  font-size: 0.7em;
+}
+.reveal section.sec3 .p3-bars .p3-bars-title {
+  margin: 0 0 0.5em;
+  text-align: center;
+  font-weight: 600;
+  color: #5b626e;
+}
+.reveal section.sec3 .p3-bar {
+  display: grid;
+  grid-template-columns: 17em 1fr 3.4em;
+  align-items: center;
+  column-gap: 0.8em;
+  margin: 0.4em 0;
+}
+.reveal section.sec3 .p3-bar .lbl { text-align: right; }
+.reveal section.sec3 .p3-bar .track {
+  position: relative;
+  height: 1em;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.reveal section.sec3 .p3-bar .fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 4px;
+  background: $sec3;
+}
+.reveal section.sec3 .p3-bar .fill.w50 { width: 100%; }
+.reveal section.sec3 .p3-bar .fill.w30 { width: 60%; }
+.reveal section.sec3 .p3-bar .fill.w5 { width: 10%; }
+.reveal section.sec3 .p3-bar .track::after {
+  content: "";
+  position: absolute;
+  top: -0.25em;
+  bottom: -0.25em;
+  left: 10%;
+  border-left: 2px dashed rgba(27, 31, 42, 0.55);
+}
+.reveal section.sec3 .p3-bar .val {
+  font-weight: 700;
+  color: $sec3;
+}
+
+// --- tables ---
+.reveal section.sec3 table.p3-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.66em;
+  line-height: 1.25;
+}
+.reveal section.sec3 table.p3-table th,
+.reveal section.sec3 table.p3-table td {
+  padding: 0.4em 0.6em;
+  border-bottom: 1px solid rgba($sec3, 0.2);
+  vertical-align: middle;
+}
+.reveal section.sec3 table.p3-table th {
+  font-weight: 700;
+  color: $sec3;
+  border-bottom: 2px solid $sec3;
+}
+
+// designed versus logged
+.reveal section.sec3 table.p3-dl { font-size: 0.74em; }
+.reveal section.sec3 table.p3-dl th { text-align: left; }
+.reveal section.sec3 table.p3-dl td:nth-child(1) {
+  width: 15%;
+  font-weight: 700;
+  color: $sec3;
+}
+.reveal section.sec3 table.p3-dl td:nth-child(2) {
+  width: 28%;
+  color: #6b7280;
+}
+.reveal section.sec3 table.p3-dl td:nth-child(3) { color: #1b1f2a; }
+
+// calibration instruments
+.reveal section.sec3 table.p3-inst { font-size: 0.76em; }
+.reveal section.sec3 table.p3-inst th,
+.reveal section.sec3 table.p3-inst td {
+  padding-top: 0.32em;
+  padding-bottom: 0.32em;
+  text-align: center;
+}
+.reveal section.sec3 table.p3-inst th { font-size: 0.94em; }
+.reveal section.sec3 table.p3-inst th:first-child,
+.reveal section.sec3 table.p3-inst td:first-child {
+  width: 41%;
+  text-align: left;
+}
+.reveal section.sec3 table.p3-inst td:first-child { font-weight: 700; }
+.reveal section.sec3 table.p3-inst .sub {
+  margin-left: 0.45em;
+  font-size: 0.86em;
+  font-weight: 400;
+  color: #6b7280;
+}
+.reveal section.sec3 table.p3-inst tbody tr:nth-child(odd) td {
+  background: rgba(255, 255, 255, 0.4);
+}
+.reveal section.sec3 table.p3-inst td.y {
+  font-size: 1.1em;
+  font-weight: 800;
+  color: $sec3;
+}
+.reveal section.sec3 table.p3-inst td.n { color: #a39cb0; }
+.reveal section.sec3 table.p3-inst td.p {
+  font-size: 0.9em;
+  font-style: italic;
+  color: #4b5563;
+}
+.reveal section.sec3 table.p3-inst tbody tr.p3-missing td {
+  background: #ffffff;
+  border-top: 2px dashed $sec3;
+  border-bottom: 2px dashed $sec3;
+}
+.reveal section.sec3 table.p3-inst tbody tr.p3-missing td:first-child {
+  border-left: 2px dashed $sec3;
+  font-size: 1.15em;
+  color: $sec3;
+}
+.reveal section.sec3 table.p3-inst tbody tr.p3-missing td:last-child {
+  border-right: 2px dashed $sec3;
+}
+
+// --- null side versus alternative side ---
+.reveal section.sec3 .p3-sides {
+  display: flex;
+  gap: 1.2em;
+  width: 84%;
+  margin: 0 auto 0.4em;
+}
+.reveal section.sec3 .p3-side {
+  flex: 1 1 0;
+  padding: 0.45em 0.9em;
+  border-radius: 10px;
+  font-size: 0.74em;
+  line-height: 1.35;
+  text-align: center;
+}
+.reveal section.sec3 .p3-side p { margin: 0.2em 0; }
+.reveal section.sec3 .p3-side.known {
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid $sec3;
+}
+.reveal section.sec3 .p3-side.unknown {
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px dashed rgba($sec3, 0.6);
+}
+.reveal section.sec3 .p3-side .p3-side-head {
+  display: block;
+  margin-bottom: 0.1em;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: $sec3;
+}

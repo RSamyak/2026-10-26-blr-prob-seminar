@@ -1,0 +1,211 @@
+## Measuring the methods {background-color="#6a4c93" .sechead}
+
+<div class="talkmap hl3">
+  <div class="lane lane0"><div class="lane-num">Intro</div><div class="lane-q">A/B testing platforms</div></div>
+  <div class="lanes">
+  <div class="lane lane1"><div class="lane-num">Problem 1</div><div class="lane-q">Speed vs accuracy</div></div>
+  <div class="lane lane2"><div class="lane-num">Problem 2</div><div class="lane-q">How many hypotheses</div></div>
+  <div class="lane lane3"><div class="lane-num">Problem 3</div><div class="lane-q">Measuring the methods</div></div>
+  </div>
+</div>
+
+::: {.notes}
+Problem 3: whether the performance computed under $M$ is the performance under the data.
+:::
+
+## Can we trust the numbers? {background-color="#e4dbee" .content .sec3 .fit}
+
+::: {.cbody}
+[Did the checkout experiment we logged match the one we designed?  Is our method as good as we think?]{.p3-lead}
+
+::: {.incremental}
+- A test's guarantees — false positives, coverage, speed — are theorems proved under $M$.
+- The platform needs that guarantee under the true law $Q$ that actually generates its data.
+:::
+
+[$$\underset{\text{proved under}}{M} \qquad\longrightarrow\qquad \underset{\text{running under}}{Q}$$]{.fragment}
+
+::: {.incremental}
+- **Measure** performance under $Q$, **calibrate** the test until its guarantee holds there, or **robustify** it over a class $\mathcal Q \ni M$.
+:::
+
+[A theorem about $M$ is not a promise about $Q$.]{.fragment .below-note}
+
+[Peter Huber 1964; James Berger 1985.]{.cite}
+:::
+
+::: {.notes}
+A third question on the same checkout page.  A test's guarantees — false positives, coverage, speed — are theorems proved under a working model M: normal noise, independent visitors, effects that hold steady over time.  The platform needs the same guarantee under the law that actually generates its data; call it Q.  Three tasks follow: measure performance under Q, calibrate a procedure until its stated guarantee holds there, or make it robust over a whole class of laws around M, as Peter Huber did for location in 1964.
+:::
+
+## Misspecification {background-color="#e4dbee" .content .sec3}
+
+::: {.cbody}
+::: {.incremental}
+- **Tails.**  Bing's revenue per user had skewness 18, so a normal interval for its mean needed about 114,000 users per arm.
+- **Dependence.**  Visitors return, and one visitor's sessions are correlated.
+- **Drift.**  Novelty fades, and refunds arrive weeks late.
+:::
+
+<div class="p3-bars fragment">
+<p class="p3-bars-title">Uber: false-positive rate under continuous monitoring, nominal 5%</p>
+<div class="p3-bar"><span class="lbl"><em>t</em>-test, peeking</span><span class="track"><span class="fill w50"></span></span><span class="val">≈ 50%</span></div>
+<div class="p3-bar"><span class="lbl">sequential, sessions independent</span><span class="track"><span class="fill w30"></span></span><span class="val">&gt; 30%</span></div>
+<div class="p3-bar"><span class="lbl">sequential, jackknife variance</span><span class="track"><span class="fill w5"></span></span><span class="val">5%</span></div>
+</div>
+
+[Randomisation intact, and a nominal 5% need not be 5%.]{.fragment .below-note}
+
+[Ron Kohavi et al. 2014; Zhenyu Zhao and Eva Feng 2017 (Uber Engineering).]{.cite}
+:::
+
+::: {.notes}
+Three ways M fails while randomisation stays intact.  Revenue is heavy-tailed: at Bing, revenue per user had skewness about 18, and the rule of thumb is that the mean needs about 114,000 users per arm before a normal confidence interval is trustworthy.  Visitors come back, and effects move, as novelty fades and refunds arrive weeks later.  Uber's engineering blog gives a rare public measurement, without its method: under continuous monitoring at a nominal 5%, a t-test gave about 50% false positives, and a sequential likelihood-ratio test that treated sessions as independent still gave just over 30%, because one user's sessions are correlated.  With a delete-a-group jackknife variance, the same test came down to 5%.  The middle bar is the lesson: a test valid under its model runs at six times its nominal rate under the truth.
+:::
+
+## What randomisation guarantees {background-color="#e4dbee" .content .sec3}
+
+::: {.cbody}
+[We toss the coin, so it is independent of everything about the visitor, measured or not.]{.p3-lead}
+
+$$Z \perp\!\!\!\perp \big(Y(0),\, Y(1),\, X\big) \;\Longrightarrow\; \mathbb E[Y \mid Z=1]-\mathbb E[Y \mid Z=0] = \mathbb E[Y(1)-Y(0)]$$
+
+::: {.incremental}
+- An unmeasured baseline variable is not a confounder.
+- Even under continuous monitoring, the coin alone gives anytime-valid intervals for the running average effect of the visitors so far: no outcome model, if outcomes lie in a known range.
+- It buys validity, not power: regret and speed still depend on $Q$.
+:::
+
+[The theorem is about the designed experiment.  We analyse the logged one.]{.fragment .below-note}
+
+[Steven Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon 2021.]{.cite}
+:::
+
+::: {.notes}
+The abstract mentioned unmeasured confounders.  The objection is the right one: this is a randomised experiment.  The theorem from the textbook slide is: the coin is independent of the potential outcomes and of every covariate, measured or not, so an unmeasured baseline variable cannot confound.  It even survives continuous monitoring: Steven Howard, Aaditya Ramdas, and co-authors build confidence sequences whose only randomness is the coin, for the running average effect of the visitors seen so far, given outcomes in a known range and known assignment probabilities bounded away from zero and one.  Revenue is not bounded: cap it, which changes the estimand, or use the asymptotic confidence sequences of Ian Waudby-Smith and co-authors.  Either way this buys validity, not power, and only for the experiment we designed.
+:::
+
+## Where confounding re-enters {background-color="#e4dbee" .content .sec3}
+
+::: {.cbody}
+<table class="p3-table p3-dl">
+<thead><tr><th></th><th>Designed</th><th>Logged</th></tr></thead>
+<tbody>
+<tr class="fragment"><td>Selection</td><td>every assigned visitor</td><td>whoever the arm lets through: triggers, crashes, attrition</td></tr>
+<tr class="fragment"><td>Balance</td><td>every covariate balanced, in expectation</td><td>an unconsidered, heavy-tailed one (a whale account) lands unevenly, by chance</td></tr>
+<tr class="fragment"><td>Identity</td><td>one arm per visitor</td><td>Etsy: 0.02% in both arms flipped the sign</td></tr>
+<tr class="fragment"><td>Allocation</td><td>a fixed split</td><td>1% on Friday, 50% on Saturday: better each day, worse pooled</td></tr>
+<tr class="fragment"><td>Interference</td><td>my outcome, my arm</td><td>my outcome, your arm too</td></tr>
+<tr class="fragment"><td>Corpus</td><td>experiments at random</td><td>the ones we ran, and the ones we wrote down</td></tr>
+</tbody>
+</table>
+
+[The assignment was randomised.  The analysed experiment is the log.]{.fragment .below-note}
+
+[David Schott 2018; Thomas Crook et al. 2009; Mack Sweeney et al. 2020; Aleksander Fabijan et al. 2019; Kari Lock Morgan and Donald Rubin 2012.]{.cite}
+:::
+
+::: {.notes}
+This is the experiment we actually analyse, and each row is a way its log departs from the design.  Balance is the one randomisation alone does not fix: it holds every covariate equal only in expectation, and a heavy-tailed one we never thought to check, a single large account, say, can land almost entirely on one side by chance, large enough to move the whole arm's average on its own; rerandomising on a covariate works only once we know to watch it.  Identity is Etsy, from the introduction.  In Thomas Crook and colleagues' ramp-up example, treatment wins on Friday and on Saturday and loses when the two days are pooled; a bandit does the same adaptively, meeting one arm on the good days.  Interference breaks the assumption that my outcome depends only on my arm, and the corpus behind G holds only the experiments we ran and wrote down.  So "unmeasured confounding" in a platform is a symptom; sample-ratio mismatch is the usual alarm, and it catches only some of these rows, and none of this one.
+:::
+
+## No ground truth {background-color="#e4dbee" .content .sec3}
+
+::: {.cbody}
+[Each experiment shows a noisy estimate, never its $\theta$.]{.p3-lead}
+
+::: {.p3-sides}
+::: {.p3-side .known}
+[$\theta = 0$]{.p3-side-head}
+
+We can make it: A/A tests.
+
+False positives and coverage: checkable.
+:::
+
+::: {.p3-side .unknown .fragment}
+[$\theta \neq 0$]{.p3-side-head}
+
+Never revealed.
+
+Replay shows speed, not regret.
+:::
+:::
+
+::: {.incremental}
+- A claim of "x% faster": at what error, under which $G$?
+:::
+
+[Scored on past winners, shipping on the first day is fastest, and it is never marked wrong.]{.fragment .below-note}
+:::
+
+::: {.notes}
+Can we at least measure performance?  The null side we can manufacture: in an A/A test the effect is zero by construction, so false positives and coverage can be checked.  The alternative side is never revealed: replaying a rule on past experiments shows when it stops, not whether it was right.  So a claim of "x% faster" means little without the error criterion and the effect distribution behind it.  [click] Scored on past winners, shipping on the first day is fastest, and it is never marked wrong.
+:::
+
+## Instruments for testing the tests {background-color="#e4dbee" .content .sec3}
+
+::: {.cbody}
+<table class="p3-table p3-inst">
+<thead><tr><th>Instrument</th><th>Real noise</th><th>Real effects</th><th>Known truth</th><th>Whole pipeline</th></tr></thead>
+<tbody>
+<tr><td>Online A/A <span class="sub">identical arms, live</span></td><td class="y">✓</td><td class="n">–</td><td class="p">$\theta = 0$</td><td class="y">✓</td></tr>
+<tr><td>Spike-in <span class="sub">add a known effect</span></td><td class="y">✓</td><td class="p">synthetic</td><td class="y">✓</td><td class="p">analysis only</td></tr>
+<tr><td>Simulation <span class="sub">draw from a fitted $M$</span></td><td class="n">–</td><td class="p">synthetic</td><td class="y">✓</td><td class="n">–</td></tr>
+<tr><td>Positive control <span class="sub">a deliberate harm</span></td><td class="y">✓</td><td class="y">✓</td><td class="p">sign only</td><td class="y">✓</td></tr>
+<tr><td>Randomisation inference <span class="sub">re-toss the coins</span></td><td class="y">✓</td><td class="n">–</td><td class="p">sharp null</td><td class="p">assumes it</td></tr>
+<tr><td>Corpus <span class="sub">past real experiments</span></td><td class="y">✓</td><td class="y">✓</td><td class="n">–</td><td class="y">✓</td></tr>
+<tr class="p3-missing fragment"><td>? <span class="sub">wanted</span></td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+</tbody>
+</table>
+
+[No instrument has all four.  That missing row is the open problem.]{.fragment .below-note}
+
+[Ron Kohavi et al. 2013, 2020; Bryan Liu et al. 2021; J. Nathan Matias et al. 2021, corrected 2024.]{.cite}
+:::
+
+::: {.notes}
+Online A/A tests have real noise and the whole pipeline but no effects; spike-ins add a known effect to real data but bypass assignment and logging; simulation draws from a fitted model and inherits its errors; positive controls, like Bing's deliberate slowdowns, have real effects of known sign but unknown size, and they cost real users; randomisation inference is exact under the sharp null but assumes the design; a corpus has everything except the truth.  Even a corpus can surprise: in 2024 the Upworthy archive's authors reported that 22% of its tests were likely not randomised, probably because a cache served one arm at a time.  No instrument has all four, and that missing row is the open problem.
+:::
+
+## What a corpus can identify {background-color="#e4dbee" .content .sec3}
+
+::: {.cbody}
+$$\hat\theta_j = \theta_j + \sigma_j\,\varepsilon_j, \qquad \theta_j \sim G, \qquad \varepsilon_j \mid \theta_j \sim F_{\theta_j}$$
+
+::: {.incremental}
+- If $F_\theta \equiv F$ is known and its characteristic function never vanishes, deconvolution identifies $G$, and with it regret.
+- A/A replicates reveal $F_0$ alone: the noise when nothing changes.
+- If treatment changes the noise, $G$ and regret are in general only partially identified.
+- Wanted: sharp bounds on regret and speed over a stated class of $F_\theta$, on a corpus filtered by what was run and recorded.
+:::
+
+[An answer would let every "x% faster" carry the interval its evidence allows.]{.fragment .below-note}
+
+[Bradley Efron 2016; Charles Manski 2003; Isaiah Andrews and Maximilian Kasy 2019.]{.cite}
+:::
+
+::: {.notes}
+Can inference fill the missing row instead?  Model the corpus as estimates equal to true effects plus scaled noise, with the noise law allowed to depend on the effect.  If the noise law is known and its characteristic function never vanishes, as for the normal, deconvolution identifies G and hence regret; but A/A replicates pin the noise down only at zero.  If treatment changes the noise, through its variance, tails, or timing, G and regret are in general only partially identified; and while stopping rules leave the likelihood alone, the corpus holds only what was run and recorded.  The question is sharp bounds over a stated class of noise laws; an answer would let every "x% faster" carry the interval its evidence allows.
+:::
+
+## [Unanswered:]{.unanswered} The guarantee, the log, the score {background-color="#e4dbee" .content .sec3 .fit .clear}
+
+::: {.cbody}
+::: {.incremental}
+- Guarantee.  Correlated sessions took a nominal 5% past 30%.  Tails and drift have no such measurement.
+  - For which class of laws does a stated false-positive rate survive, and by how much?
+- Log.  The coin protects the experiment we designed.  We analyse the one we logged.
+  - If some visitors are mis-assigned, or one heavy covariate we never recorded lands on one side, which diagnostics bound the bias?
+- Score.  An effect other than zero is never revealed.
+  - What can A/A tests, a spike-in, and a corpus identify together, as bounds rather than a point?
+:::
+
+[Why industry cares: a false win that ships, or a real win you cannot trust, is dollars left on the table.]{.fragment .below-note}
+
+[Peter Huber 1964; Michael Lindon and Alan Malek 2022; Charles Manski 2003.]{.cite}
+:::
+
+::: {.notes}
+Three open questions, in the order the section raised them.  [click] The guarantee.  At Uber a test valid under independence ran above 30% when one user's sessions were correlated, against a nominal 5%, and peeking took a t-test to about 50%.  Tails and drift are real, and neither came with a rate.  Peter Huber's question, for this setting: over which class of laws does the stated rate survive, and what is the bound.  [click] The log.  The theorem was about the coin we tossed.  The analysis is of the experiment we recorded.  A mis-assigned fraction can bias the contrast by about ε B over p-min, for outcomes in [0, B] and a smaller arm of share p-min; at Etsy, 0.02% over 5% is 0.4% of the small arm, enough to flip a small effect.  One large account we never thought to balance on can do the same on its own.  A sample-ratio test, including the anytime-valid one of Michael Lindon and Alan Malek, sees the counts and not who was exposed to what, and it sees nothing of a covariate we did not record.  [click] The score.  An A/A test checks the null.  A spike-in adds an effect we invented.  A corpus has the real effects and not the truth.  Charles Manski's partial identification is the shape of an answer: bounds on the error, from the three together, rather than a single "x% faster".  [click] Why industry cares: a false win that ships, or a real win you cannot trust, is dollars left on the table.
+:::

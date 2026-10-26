@@ -1,0 +1,52 @@
+## Industry can pay for answers {background-color="#ffffff" .content .funding}
+
+::: {.cbody}
+::: {.funding-grid}
+```{=html}
+<img class="fragment" data-fragment-index="1" src="images/funding/intuit.png" alt="Intuit announces its inaugural Faculty Research Award recipients">
+<img class="fragment" data-fragment-index="2" src="images/funding/amazon.png" alt="Amazon Research Awards opens its Fall 2026 call for proposals">
+<img class="fragment" data-fragment-index="3" src="images/funding/microsoft.png" alt="2026 Microsoft Research Fellowship">
+<img class="fragment" data-fragment-index="4" src="images/funding/google.png" alt="Google Academic Research Awards">
+```
+:::
+:::
+
+::: {.notes}
+An aside before the end.  Four announcements, as published.  [click] Intuit's inaugural Faculty Research Awards, September 2026: half a million dollars across five awards, unrestricted gifts.  That call was open only to faculty at US institutions.  I am pointing at public programmes, not making an offer.  intuit.com/blog/global-stories/intuit-faculty-research-awards.  [click] Amazon Research Awards, Fall 2026: submissions close on 4 November, open worldwide, India included.  amazon.science/research-awards/latest-news/amazon-research-awards-opens-fall-2026-call-for-proposals.  [click] Microsoft Research Fellowship: the page says the 2026 call closed in November 2025, and India was a listed region.  microsoft.com/en-us/research/academic-program/2026-microsoft-research-fellowship.  [click] Google Academic Research Awards: the 2026 topics were quantum, so this cycle shows that the programme exists.  research.google/programs-and-events/google-academic-research-awards.  [Optional: CODE@MIT, the Conference on Digital Experimentation, is on 13 and 14 November.]
+:::
+
+## {.takeaway-slide}
+
+::: {.thanks-block}
+::: {.thanks-text}
+[ಧನ್ಯವಾದಗಳು &middot; Thank you]{.thanks-line}
+
+[samyak@alumni.stanford.edu &middot; linkedin.com/in/rsamyak]{.contact-line}
+:::
+
+::: {.thanks-qr-block}
+[These slides]{.qr-label}
+
+![](images/slides-qr.png){.thanks-qr}
+:::
+:::
+
+::: {.takeaway}
+::: {.col .c1}
+[Speed vs accuracy]{.col-title}
+:::
+
+::: {.col .c2}
+[How many hypotheses]{.col-title}
+:::
+
+::: {.col .c3}
+[Measuring the methods]{.col-title}
+:::
+:::
+
+[$\{\text{questions industry cares about}\} \cap \{\text{academic expertise needed to solve them}\} \neq \emptyset$ !]{.takeaway-close}
+
+::: {.notes}
+Three questions about one checkout page.  Speed versus accuracy: the speed–regret frontier is classical Bayes sequential analysis; what is open is how far a small menu of tests falls short of it, for the priors, clocks, and contracts platforms actually have.  How many hypotheses: one formulation gives each idea a size or none, under one period's traffic; what is open is what a size is worth, learnt from the experiments that rule would itself have run.  Measuring the methods: randomisation protects the experiment we designed, but we analyse the one we logged.  What is open is whether the guarantee survives, whether the log can be certified, and whether a method can be scored at all.  Every "open" today meant "open as far as I know".  [click] The questions industry cares about, and those that need academic expertise to solve them, have a non-empty intersection.  Thank you.
+:::

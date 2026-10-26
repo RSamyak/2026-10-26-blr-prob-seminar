@@ -1,0 +1,41 @@
+/*-- scss:rules --*/
+
+// Problem 2: the running-example question, the readings grid,
+// and the traffic scene (the intro's visitors and checkout cards).
+.reveal .p2-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.reveal .p2-scene text { font-family: $font-family-sans-serif; }
+.reveal section.sec2 .p2-lead {
+  display: block;
+  margin: 0 0 0.8em;
+  text-align: center;
+  font-weight: 600;
+  color: $sec2;
+}
+
+.reveal section.sec2 .p2-readings { font-size: 0.78em; }
+.reveal section.sec2 .p2-row p {
+  display: grid;
+  grid-template-columns: 1.3fr 1.25fr 0.7fr;
+  gap: 0 1em;
+  align-items: baseline;
+  margin: 0;
+  padding: 0.5em 0.4em;
+  border-bottom: 1px solid rgba(21, 122, 115, 0.3);
+}
+.reveal section.sec2 .p2-what { font-weight: 700; }
+.reveal section.sec2 .p2-unit { color: #5b626e; }
+.reveal section.sec2 .p2-state {
+  text-align: right;
+  font-style: italic;
+  color: #5b626e;
+}
+.reveal section.sec2 .p2-hot .p2-state {
+  font-style: normal;
+  font-weight: 700;
+  color: $sec2;
+}

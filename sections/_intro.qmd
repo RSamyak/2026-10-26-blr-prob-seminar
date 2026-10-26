@@ -1,0 +1,339 @@
+## Intro {background-color="#243056" .sechead}
+
+<div class="talkmap hl0">
+  <div class="lane lane0"><div class="lane-num">Intro</div><div class="lane-q">A/B testing platforms</div></div>
+  <div class="lanes">
+  <div class="lane lane1"><div class="lane-num">Problem 1</div><div class="lane-q">Speed vs accuracy</div></div>
+  <div class="lane lane2"><div class="lane-num">Problem 2</div><div class="lane-q">How many hypotheses</div></div>
+  <div class="lane lane3"><div class="lane-num">Problem 3</div><div class="lane-q">Measuring the methods</div></div>
+  </div>
+</div>
+
+::: {.notes}
+Part one: the platform, and why a probabilist might care.
+:::
+
+## Sample experiment: checkout page {background-color="#e4e7ef" .content .sec0 .ab-hero}
+
+::: {.cbody}
+```{=html}
+<svg class="ab-scene" viewBox="0 0 1180 500" role="img" aria-label="Ten visitors. A coin sends five to Variant A and five to Variant B. Two of five pay on A, three of five on B.">
+  <defs>
+    <marker id="ab-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.2 L9 5 L0 8.8 Z" fill="#243056"/>
+    </marker>
+    <symbol id="ab-person" viewBox="-18 -12 36 64">
+      <circle cx="0" cy="0" r="8.5" fill="#ffffff" stroke="#243056" stroke-width="2.6"/>
+      <path d="M0 9.5 V28 M0 17 L-12 27 M0 17 L12 27 M0 28 L-8 47 M0 28 L8 47" fill="none" stroke="#243056" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ab-cursor" viewBox="0 0 16 22">
+      <path d="M1 1 L1 17 L5.2 13.2 L9.2 21 L12.2 19.6 L8.1 12.2 L14 12.2 Z" fill="#243056" stroke="#ffffff" stroke-width="1" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ab-tick" viewBox="-12 -12 24 24">
+      <circle cx="0" cy="0" r="11" fill="#b8860b"/>
+      <path d="M-4.5 0.5 l3 3.1 6-6.4" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+
+  <g class="fragment ab-arrivals" data-fragment-index="2">
+    <use href="#ab-person" x="356" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="404" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="452" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="500" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="548" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="596" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="644" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="692" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="740" y="0" width="36" height="64" class="ab-person"/>
+    <use href="#ab-person" x="788" y="0" width="36" height="64" class="ab-person"/>
+  </g>
+
+  <g class="fragment ab-assign" data-fragment-index="3">
+    <path d="M590 70 V108" fill="none" stroke="#243056" stroke-width="2.4" marker-end="url(#ab-arrow)"/>
+    <g class="ab-coin">
+      <circle cx="590" cy="146" r="28" fill="#ffffff" stroke="#243056" stroke-width="2.6"/>
+      <text x="590" y="155" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#243056">½</text>
+    </g>
+    <path d="M566 164 C 430 196, 300 196, 290 214" fill="none" stroke="#243056" stroke-width="2.4" marker-end="url(#ab-arrow)"/>
+    <path d="M614 164 C 750 196, 880 196, 890 214" fill="none" stroke="#243056" stroke-width="2.4" marker-end="url(#ab-arrow)"/>
+  </g>
+
+  <g class="fragment ab-page" data-fragment-index="1">
+    <rect x="30" y="222" width="520" height="268" rx="16" fill="#ffffff" stroke="#d8dbe3"/>
+    <text x="54" y="252" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#8a8f9a">VARIANT A</text>
+    <rect x="50" y="266" width="480" height="150" rx="10" fill="#f6f7fb" stroke="#e3e6ee"/>
+    <circle cx="70" cy="284" r="4" fill="#d5d8e2"/>
+    <circle cx="84" cy="284" r="4" fill="#d5d8e2"/>
+    <circle cx="98" cy="284" r="4" fill="#d5d8e2"/>
+    <text x="70" y="316" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#16213e">Checkout</text>
+    <rect x="70" y="330" width="34" height="34" rx="6" fill="#e4e7ef"/>
+    <text x="116" y="346" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" fill="#1b1f2a">Tote bag</text>
+    <text x="116" y="366" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" fill="#8a8f9a">Qty 1</text>
+    <text x="506" y="354" text-anchor="end" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#16213e">$25</text>
+    <rect x="420" y="376" width="90" height="28" rx="7" fill="#ffffff" stroke="#243056" stroke-width="1.8"/>
+    <text x="465" y="395" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#243056">Pay</text>
+    <use href="#ab-cursor" x="404" y="372" width="18" height="24" class="ab-cursor"/>
+  </g>
+
+  <g class="fragment ab-page ab-page-new" data-fragment-index="1">
+    <rect x="630" y="222" width="520" height="268" rx="16" fill="#ffffff" stroke="#d8dbe3"/>
+    <text x="654" y="252" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="1.6" fill="#8a8f9a">VARIANT B</text>
+    <rect x="650" y="266" width="480" height="150" rx="10" fill="#f6f7fb" stroke="#e3e6ee"/>
+    <circle cx="670" cy="284" r="4" fill="#d5d8e2"/>
+    <circle cx="684" cy="284" r="4" fill="#d5d8e2"/>
+    <circle cx="698" cy="284" r="4" fill="#d5d8e2"/>
+    <text x="670" y="316" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#16213e">Checkout</text>
+    <rect x="670" y="328" width="30" height="30" rx="6" fill="#e4e7ef"/>
+    <text x="710" y="342" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" fill="#1b1f2a">Tote bag</text>
+    <text x="710" y="360" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" fill="#8a8f9a">Free returns</text>
+    <text x="1106" y="350" text-anchor="end" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#16213e">$25</text>
+    <rect x="670" y="372" width="440" height="32" rx="8" fill="#243056"/>
+    <text x="890" y="394" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Pay now</text>
+    <use href="#ab-cursor" x="1036" y="364" width="18" height="24" class="ab-cursor"/>
+  </g>
+
+  <g class="fragment ab-landed" data-fragment-index="4">
+    <use href="#ab-person" x="174" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="224" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="274" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="324" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="374" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="774" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="824" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="874" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="924" y="424" width="32" height="56" class="ab-person"/>
+    <use href="#ab-person" x="974" y="424" width="32" height="56" class="ab-person"/>
+  </g>
+
+  <g class="fragment ab-paid" data-fragment-index="5">
+    <use href="#ab-tick" x="179" y="422" width="22" height="22"/>
+    <use href="#ab-tick" x="229" y="422" width="22" height="22"/>
+    <use href="#ab-tick" x="779" y="422" width="22" height="22"/>
+    <use href="#ab-tick" x="829" y="422" width="22" height="22"/>
+    <use href="#ab-tick" x="879" y="422" width="22" height="22"/>
+  </g>
+</svg>
+```
+
+[Metric: Click-through rate / Revenue per user]{.fragment .below-note data-fragment-index="6"}
+:::
+
+::: {.notes}
+The picture the rest of the talk points at, brought in one piece at a time.  First the two pages: Variant A and Variant B, same bag, same price, a different pay button.  Then ten visitors.  Then the coin, which sends five to each page.  Then who paid: two of the five on A, three of the five on B.  Last, the metric: click-through rate, or revenue per user.
+
+The pages are invented.  The same people, the same coin, and the same two pages return whenever a later section needs a concrete experiment.  Every question after this is a question about it.
+:::
+
+## The textbook A/B test {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+::: {.incremental}
+- $Z_i$ is $A$ or $B$ with equal probability, and we observe $Y_i=Y_i(Z_i)$.
+- $\theta=\mathbb{E}[Y_i(B)-Y_i(A)]$, over a random visitor. $\hat\theta=\bar Y_B-\bar Y_A$. Let $\mathcal X$ be the observed data.
+:::
+
+::: {.fragment}
+$$
+\varphi(\mathcal X)=\begin{cases} B & \text{if }\hat\theta>1.96\operatorname{se}(\hat\theta),\\ A & \text{o.w.}\end{cases}
+\qquad
+\varphi^*(\theta)=\begin{cases} B & \text{if }\theta>0,\\ A & \text{o.w.}\end{cases}
+$$
+:::
+
+::: {.incremental}
+- Guarantee. $\mathbb{P}(|\hat\theta|>1.96\operatorname{se}(\hat\theta))\approx0.05$ when $\theta=0$.
+:::
+
+[Jerzy Neyman 1923; Ronald Fisher 1935; Donald Rubin 1974.]{.cite}
+:::
+
+::: {.notes}
+The picture, written down, with no control and no treatment.  $Z_i$ sends visitor $i$ to page A or page B.  $Y_i(A)$ and $Y_i(B)$ are the two potential revenues; we see one.  [click] $\theta$ is B's lift over A, averaged over a random visitor from the population.  The coin decides which of the two revenues we see.  $\hat\theta$ is the difference of the two sample means, and $\mathcal X$ is the whole observed sample.  [click] $\varphi(\mathcal X)$ picks a page from the data: B when the difference clears $1.96$ standard errors, A otherwise, so the new page ships only on evidence.  $\varphi^*(\theta)$ is the oracle, the page we would pick if we knew $\theta$.  [click] The guarantee is the test's two-sided level: when $\theta$ is zero, the chance that $|\hat\theta|$ clears $1.96$ standard errors is about 5%.  Randomisation makes $\hat\theta$ unbiased, and the central limit theorem supplies the standard error.  The next slide defines the stopping time $\tau$.  On this slide the sample is fixed, so $\tau=n$.  $\Phi$, when it appears, is the frontier, a different letter.  Jerzy Neyman wrote the potential-outcome comparison in 1923.  Ronald Fisher made randomisation the basis of the inference.  Donald Rubin gave potential outcomes their general form.
+:::
+
+## A sequential test {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+::: {.incremental}
+- Visitors arrive in order. $\mathcal X_t$ is the data up to time $t$, and $\hat\theta_t$ is its estimate.
+- $\tau$ is a stopping time: $\{\tau=t\}$ is determined by $\mathcal X_t$. The observed sample is $\mathcal X=\mathcal X_\tau$.
+- One example. Boundaries $b_t$, fixed in advance, up to a last time $n$.
+:::
+
+::: {.fragment}
+$$
+\tau=\min\big(\{t\le n:|\hat\theta_t|\ge b_t\}\cup\{n\}\big),
+\qquad
+\varphi(\mathcal X)=\begin{cases} B & \text{if }\hat\theta_\tau\ge b_\tau,\\ A & \text{o.w.}\end{cases}
+$$
+:::
+
+::: {.incremental}
+- The textbook test is $b_t=\infty$ for $t<n$, and $b_n=1.96\operatorname{se}(\hat\theta_n)$.
+:::
+
+[The level belongs to $(\tau,\varphi)$, not to the number $1.96$.]{.fragment .below-note}
+
+[Abraham Wald 1945.]{.cite}
+:::
+
+::: {.notes}
+A sequential test is a pair $(\tau,\varphi)$: stop according to a stopping time, then apply a rule that sees only the data actually observed.  The boundary on $\hat\theta_t$ is one example, not the definition.  With $b_t=\infty$ before $n$, it never stops early, and $\varphi$ reduces to the textbook rule.  Abraham Wald's sequential probability ratio test, which returns by name on the menu slide, stops when a likelihood ratio leaves an interval.  The number 1.96 gives the two-sided 5% test at one planned sample size: a 5% chance of choosing B when there is no effect.  The same comparison at a $\tau$ that can stop earlier is a different test, and its level is computed for that pair.  $\Phi$, the frontier, is still a different letter.
+:::
+
+## Experiment platforms {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+```{=html}
+<div class="plat-board">
+  <div class="plat-group fragment" data-fragment-index="1">
+    <div class="plat-label">In-house <span>their own users</span></div>
+    <div class="plat-row">
+      <div class="plat"><img src="images/logos/amazon.svg" alt=""><span>Amazon</span></div>
+      <div class="plat"><img src="images/logos/microsoft.svg" alt=""><span>Microsoft</span></div>
+      <div class="plat"><img src="images/logos/google.svg" alt=""><span>Google</span></div>
+      <div class="plat"><img src="images/logos/meta.svg" alt=""><span>Meta</span></div>
+      <div class="plat"><img src="images/logos/netflix.svg" alt=""><span>Netflix</span></div>
+      <div class="plat"><img class="mark" src="images/logos/intuit.svg" alt=""><span>Intuit</span></div>
+    </div>
+  </div>
+  <div class="plat-group fragment" data-fragment-index="2">
+    <div class="plat-label">Vendors <span>no users of their own</span></div>
+    <div class="plat-row">
+      <div class="plat"><img src="images/logos/optimizely-n8n.svg" alt=""><span>Optimizely</span></div>
+      <div class="plat"><img src="images/logos/statsig-mark.svg" alt=""><span>Statsig</span></div>
+      <div class="plat"><img src="images/logos/eppo.svg" alt=""><span>Eppo</span></div>
+      <div class="plat"><img src="images/logos/vwo.svg" alt=""><span>VWO</span></div>
+    </div>
+  </div>
+</div>
+```
+:::
+
+::: {.notes}
+Two kinds, and only a sample of each.  Amazon, Microsoft, Google, Meta, Netflix, and Intuit run experiments on their own users.  Optimizely, Statsig, Eppo, and VWO sell the machinery to other companies, and have no user base of their own.  The next slide is why a one per cent move matters for the first kind.
+:::
+
+## Why 1% matters {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+::: {.incremental}
+- 2017: Amazon, Booking.com, Facebook, Google, and Microsoft each ran over 10,000 experiments a year.
+- Most changes move engagement by less than 1%.
+- Bing: 100 milliseconds of delay cost 0.6% of revenue, \$18 million a year.
+- Rarely, a big one: a 2012 ad-headline tweak, +12% revenue, over \$100 million a year.
+:::
+
+[Most effects are fractions of a per cent, and a fraction of a per cent is millions.]{.fragment .below-note}
+
+[Ron Kohavi and Stefan Thomke, *Harvard Business Review*, 2017.]{.cite}
+:::
+
+::: {.notes}
+Why industry cares.  In 2017 Ron Kohavi and Stefan Thomke reported that these five companies each ran more than ten thousand controlled experiments a year; at a 2018 summit, thirteen organisations reported over a hundred thousand treatments in the preceding year.  Most changes move engagement by less than one per cent, yet Bing found that every tenth of a second of delay cost 0.6% of revenue, eighteen million dollars a year.  Once in a while there is a big one: a 2012 ad-headline change, after more than six months in the backlog, lifted revenue 12%, over a hundred million dollars a year in the United States alone.  The platform's first reaction was a 'too good to be true' alert, because such alerts usually signal a bug.
+:::
+
+## Huge samples, still too small {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+::: {.incremental}
+- Our checkout page: revenue per visitor, mean \$1.25, standard deviation \$5.6.
+- To detect $\theta$ at two-sided level 5% with power 80%: $n \approx 16\sigma^2/\theta^2$ visitors per arm.
+:::
+
+<table class="intro-table sizes fragment">
+<tr><th>Lift to detect</th><th>Visitors per arm</th></tr>
+<tr><td>5%</td><td>130 thousand</td></tr>
+<tr class="fragment"><td>1%</td><td>3.2 million</td></tr>
+<tr class="fragment"><td>0.1%</td><td>320 million</td></tr>
+<tr class="fragment"><td>0.02%</td><td>8.0 billion</td></tr>
+</table>
+
+[Effects worth millions sit at $\theta \asymp \sigma/\sqrt{n}$, where a bias the size of $\theta$ decides the answer.]{.fragment .below-note}
+
+[Robert Lehr 1992; worked example from Nicholas Larsen et al. 2024.]{.cite}
+:::
+
+::: {.notes}
+The same fact, as a probabilist sees it, on our checkout page.  The numbers come from the worked example in the review by Nicholas Larsen and co-authors: 5% of visitors buy, spending \$25 on average with standard deviation \$6, so revenue per visitor has mean \$1.25 and standard deviation about \$5.6.  Robert Lehr's rule of sixteen, n ≈ 16σ²/θ² per arm for a two-sided 5% test with 80% power, gives about a hundred and thirty thousand visitors per arm for a 5% lift.  For 0.02%, which at fifty billion dollars of revenue is ten million dollars a year, it gives 8.0 billion per arm.  So the effects that matter live at θ of order σ/√n: we are permanently at local alternatives, where a bias as small as the effect decides the sign.
+:::
+
+## The industrial A/B test {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+<div class="intro-pipeline">
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Hypothesis</div><div class="gl">new checkout lifts revenue</div></div>
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Flag</div><div class="gl">new page on/off</div></div>
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Assignment</div><div class="gl">hash(visitor) →&nbsp;arm</div></div>
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Exposure</div><div class="gl">visitor reaches checkout</div></div>
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Events</div><div class="gl">clicks, orders, refunds</div></div>
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Metrics</div><div class="gl">revenue per visitor</div></div>
+<div class="step est"><div class="lbl">Estimate</div><div class="gl">difference in means</div></div>
+<div class="step fragment" data-fragment-index="1"><div class="lbl">Decision</div><div class="gl">ship or not</div></div>
+</div>
+
+[The estimator is one box.  Every arrow can break the conclusion.]{.fragment .below-note}
+
+[Platform anatomy after Somit Gupta et al. 2018.]{.cite}
+:::
+
+::: {.notes}
+The textbook gives us one box: the estimate.  An experimentation platform is the software that runs the whole chain, for hundreds of experiments at once, over a thousand at the largest.  A hypothesis becomes a flag in the code; a salted hash of the visitor's identifier picks the arm, so a returning visitor sees the same page; the product logs who actually reached the checkout; raw events are cleaned, joined, and aggregated per visitor; only then come the difference in means and a decision.  Each arrow is separate software with its own owners, and each can quietly break the conclusion.
+:::
+
+## A small overlap {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+::: {.incremental}
+- Etsy, 2018: 5% control, 95% treatment.  Expected a win; got a loss.
+- Cause: 0.02% of browsers sat in both arms.
+    - At checkout, two overrides swapped the bucketing identifier.
+- Those browsers were highly engaged, and the 5% arm felt them most.
+- Excluding them, the effect was positive.
+:::
+
+[A negligible fraction of users is not a negligible bias.]{.fragment .below-note}
+
+[David Schott, Etsy Code as Craft, 2018.]{.cite}
+:::
+
+::: {.notes}
+One arrow breaking, from David Schott's post on Etsy's engineering blog.  A test with 5% control and 95% treatment was expected to raise conversion; the dashboard said treatment lost.  The analysts found that 0.02% of browsers were in both arms.  Signing in at checkout from a new device sent a security email, and years-old code written for email experiments re-bucketed those browsers by email address; a second override did the same for checkouts from sellers' own sites on another domain.  They were highly engaged, and 0.02% of all browsers is about 0.4% of a 5% arm, so the small control got the lift; with them excluded, the effect was positive.  The estimator computed the contrast it was given.  The assignment was not the one in the design.
+:::
+
+## What scale changes {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+<table class="intro-table contrast">
+<tr><th>Textbook</th><th>At scale</th></tr>
+<tr class="fragment"><td>One experiment</td><td>Hundreds at once, on the same users</td></tr>
+<tr class="fragment"><td>One metric</td><td>Hundreds per experiment</td></tr>
+<tr class="fragment"><td>One look, at a planned sample size</td><td>Watched continuously, stopped at will</td></tr>
+<tr class="fragment"><td>One unknown effect</td><td>Thousands of effects, most near zero</td></tr>
+<tr class="fragment"><td>One test</td><td>A menu: fixed horizon, group sequential, SPRT, mixture SPRT, Bayesian, expected loss, bandits</td></tr>
+</table>
+
+[Not Bayes versus frequentist.  The question is what is guaranteed, under which stopping and allocation rule, for which loss.]{.fragment .below-note}
+
+[Ron Kohavi et al. 2013; Ramesh Johari et al. 2022; Ron Kohavi and Stefan Thomke 2017; Nicholas Larsen et al. 2024.]{.cite}
+:::
+
+::: {.notes}
+Scale changes the regime, not the estimator.  In 2013 Bing alone had over two hundred experiments running on any given day, on the same users; each experiment carries hundreds of metrics; only ten to twenty per cent of experiments at Google and Bing come out positive; and people watch the dashboard and stop when it looks good, which Ramesh Johari and co-authors call commonplace.  So platforms offer a menu: fixed horizon, group sequential, Abraham Wald's SPRT, mixture SPRTs valid at any stopping time, Bayesian posteriors, expected loss, and bandits, and different companies choose differently.  The interesting question is not Bayes versus frequentist; it is what each procedure guarantees, under which stopping and allocation rule, for which loss.
+:::
+
+## Three questions about one checkout page {background-color="#e4e7ef" .content .sec0}
+
+::: {.cbody}
+<div class="intro-questions">
+<div class="q q1 fragment"><div class="qn">Problem 1</div><div class="qname">Speed vs accuracy</div><div class="qt">When do we stop and decide whether to ship it?</div></div>
+<div class="q q2 fragment"><div class="qn">Problem 2</div><div class="qname">How many hypotheses</div><div class="qt">Why should it get users instead of hundreds of other ideas?</div></div>
+<div class="q q3 fragment"><div class="qn">Problem 3</div><div class="qname">Measuring the methods</div><div class="qt">Did the experiment we logged match the one we designed, and is our method as good as we think?</div></div>
+</div>
+
+[Each has a classical core, some initial attempts, and questions yet unanswered.]{.fragment .below-note}
+:::
+
+::: {.notes}
+So here are the three problems, each as a question about our checkout page.  First: we watch it every day, so when do we stop and decide whether to ship?  Second: traffic is finite, so why should this page get users instead of hundreds of other ideas?  Third, remembering Etsy: did the experiment we logged match the one we designed, and is our method as good as we think?  Each has a classical core, some initial attempts, and questions yet unanswered.
+:::

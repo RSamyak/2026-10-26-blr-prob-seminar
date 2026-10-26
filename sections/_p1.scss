@@ -1,0 +1,33 @@
+/*-- scss:rules --*/
+
+// Problem 1: the speed-regret figure (inline SVG) and its caption.
+.reveal .p1-fig { width: 800px; margin: 0 auto; }
+.reveal svg.p1-frontier { display: block; width: 100%; height: auto; }
+.reveal svg.p1-frontier text { fill: #1b1f2a; font-size: 14px; }
+.reveal svg.p1-frontier .fr-grid { stroke: #1b1f2a; stroke-opacity: 0.1; }
+.reveal svg.p1-frontier .fr-frame { fill: none; stroke: #8a8f9a; }
+.reveal svg.p1-frontier .fr-tick { fill: #5b626e; font-size: 15px; }
+.reveal svg.p1-frontier .fr-axis { font-size: 15px; font-weight: 600; }
+.reveal svg.p1-frontier .fr-key { font-size: 15px; }
+.reveal svg.p1-frontier .fr-void { fill: #8a8f9a; font-size: 15px; font-style: italic; }
+.reveal .p1-validity-fig { width: 700px; margin: 0 auto; }
+.reveal svg.p1-validity { display: block; width: 100%; height: auto; }
+.reveal svg.p1-validity text { fill: #1b1f2a; font-size: 14px; }
+.reveal svg.p1-validity .fr-grid { stroke: #1b1f2a; stroke-opacity: 0.1; }
+.reveal svg.p1-validity .fr-frame { fill: none; stroke: #8a8f9a; }
+.reveal svg.p1-validity .fr-tick { fill: #5b626e; font-size: 14px; }
+.reveal svg.p1-validity .fr-axis { font-size: 15px; font-weight: 600; }
+.reveal svg.p1-validity .fr-key { font-size: 14px; }
+.reveal svg.p1-validity .va-level {
+  stroke: #6b7280;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+.reveal svg.p1-validity .va-level-label { fill: #6b7280; font-size: 12px; }
+.reveal section.content .cbody .p1-caption {
+  display: block;
+  margin-top: 0.25em;
+  text-align: center;
+  font-size: 0.5em;
+  color: #6b7280;
+}

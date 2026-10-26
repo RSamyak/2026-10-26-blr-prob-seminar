@@ -1,0 +1,274 @@
+## How many hypotheses {background-color="#157a73" .sechead}
+
+<div class="talkmap hl2">
+  <div class="lane lane0"><div class="lane-num">Intro</div><div class="lane-q">A/B testing platforms</div></div>
+  <div class="lanes">
+  <div class="lane lane1"><div class="lane-num">Problem 1</div><div class="lane-q">Speed vs accuracy</div></div>
+  <div class="lane lane2"><div class="lane-num">Problem 2</div><div class="lane-q">How many hypotheses</div></div>
+  <div class="lane lane3"><div class="lane-num">Problem 3</div><div class="lane-q">Measuring the methods</div></div>
+  </div>
+</div>
+
+::: {.notes}
+So far, one experiment.  Now hundreds of ideas and one budget.
+:::
+
+## One sentence, four problems {background-color="#cdeae7" .content .sec2}
+
+::: {.cbody}
+[Why should the checkout redesign get users instead of hundreds of other ideas?]{.p2-lead}
+
+::: {.p2-readings}
+::: {.p2-row .fragment}
+[Many tests inside one experiment]{.p2-what}[metrics, arms, segments]{.p2-unit}[classical: FWER, FDR]{.p2-state}
+:::
+
+::: {.p2-row .fragment}
+[A stream of experiments]{.p2-what}[decisions in time order]{.p2-unit}[mature: online FDR]{.p2-state}
+:::
+
+::: {.p2-row .fragment}
+[Experiments sharing traffic]{.p2-what}[layers, overlapping populations]{.p2-unit}[mostly convention]{.p2-state}
+:::
+
+::: {.p2-row .p2-hot .fragment}
+[Which ideas get traffic]{.p2-what}[how many, how much, on whom]{.p2-unit}[little theory]{.p2-state}
+:::
+:::
+
+[Multiple testing asks how to read the answers.  A platform must first choose which questions get asked.]{.fragment .below-note}
+
+[Sture Holm 1979; Yoav Benjamini and Yosef Hochberg 1995; Frank Bretz et al. 2009; Dean Foster and Robert Stine 2008; Adel Javanmard and Andrea Montanari 2018; Jacqueline Doremus et al. 2026.]{.cite}
+:::
+
+::: {.notes}
+Problem 2 asks of our checkout redesign: why should it get users instead of hundreds of other ideas?  The abstract's 'how many and what sort of hypotheses' hides four problems.  Inside one experiment, multiplicity is classical: Sture Holm's step-down procedure, Yoav Benjamini and Yosef Hochberg's false discovery rate, and the gatekeeping of clinical trials.  A stream of experiments under one error budget is the mature online-FDR literature, and traffic sharing runs mostly on convention.  The last row is what a platform decides every quarter, and there is little theory for it: a 2026 review by Jacqueline Doremus, Joel Persson, and colleagues finds about 86% of 355 papers since 2000 studying one experiment at a time.
+:::
+
+## Hundreds of ideas, ten thousand visitors {background-color="#cdeae7" .content .sec2}
+
+::: {.cbody}
+```{=html}
+<svg class="p2-scene" viewBox="0 0 1180 316" role="img" aria-label="Ten thousand visitors can be split, unequally, across versions of the checkout page. How many ideas, and how much traffic each?">
+  <defs>
+    <marker id="p2-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.2 L9 5 L0 8.8 Z" fill="#157a73"/>
+    </marker>
+    <symbol id="p2-person" viewBox="-18 -12 36 64">
+      <circle cx="0" cy="0" r="8.5" fill="#ffffff" stroke="#243056" stroke-width="2.6"/>
+      <path d="M0 9.5 V28 M0 17 L-12 27 M0 17 L12 27 M0 28 L-8 47 M0 28 L8 47" fill="none" stroke="#243056" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="p2-card" viewBox="0 0 200 128">
+      <rect width="200" height="128" rx="16" fill="#ffffff" stroke="#d8dbe3"/>
+      <circle cx="22" cy="18" r="3.5" fill="#d5d8e2"/>
+      <circle cx="34" cy="18" r="3.5" fill="#d5d8e2"/>
+      <circle cx="46" cy="18" r="3.5" fill="#d5d8e2"/>
+      <text x="22" y="48" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#8a8f9a">CHECKOUT</text>
+      <rect x="22" y="86" width="156" height="26" rx="7" fill="#243056"/>
+    </symbol>
+  </defs>
+
+  <g class="fragment" data-fragment-index="1">
+    <use href="#p2-person" x="48" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="84" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="120" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="156" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="192" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="228" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="264" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="300" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="336" y="0" width="30" height="52"/>
+    <use href="#p2-person" x="372" y="0" width="30" height="52"/>
+    <text x="440" y="24" font-size="26" font-weight="700" fill="#243056">10,000 visitors</text>
+    <text x="440" y="50" font-size="16" fill="#5b626e">one period, on this page</text>
+  </g>
+
+  <g class="fragment" data-fragment-index="2">
+    <text x="440" y="86" font-size="16" fill="#243056">A 5% lift needs about 130,000 per arm.</text>
+    <text x="440" y="110" font-size="16" fill="#243056">This crowd can confirm a lift of about $0.30.</text>
+  </g>
+
+  <g class="fragment" data-fragment-index="3">
+    <use href="#p2-card" x="62" y="176" width="200" height="128"/>
+    <text x="84" y="250" font-size="18" font-weight="700" fill="#16213e">Pay now</text>
+    <text x="162" y="279" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Pay</text>
+
+    <use href="#p2-card" x="276" y="176" width="200" height="128"/>
+    <text x="298" y="250" font-size="18" font-weight="700" fill="#16213e">Free returns</text>
+    <text x="376" y="279" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Pay</text>
+
+    <use href="#p2-card" x="490" y="176" width="200" height="128"/>
+    <text x="512" y="250" font-size="18" font-weight="700" fill="#16213e">One-tap pay</text>
+    <text x="590" y="279" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Pay</text>
+
+    <use href="#p2-card" x="704" y="176" width="200" height="128"/>
+    <text x="726" y="250" font-size="18" font-weight="700" fill="#16213e">Guest checkout</text>
+    <text x="804" y="279" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Pay</text>
+
+    <g>
+      <rect x="918" y="176" width="200" height="128" rx="16" fill="#ffffff" stroke="#8a8f9a" stroke-dasharray="6 5"/>
+      <text x="1018" y="232" text-anchor="middle" font-size="18" font-weight="700" fill="#5b626e">+ hundreds</text>
+      <text x="1018" y="258" text-anchor="middle" font-size="14" fill="#8a8f9a">more ideas</text>
+    </g>
+  </g>
+
+  <g class="fragment" data-fragment-index="4">
+    <path d="M120 68 C 120 150, 162 154, 162 170" fill="none" stroke="#157a73" stroke-width="5" marker-end="url(#p2-arrow)"/>
+    <path d="M230 68 C 230 152, 376 154, 376 170" fill="none" stroke="#157a73" stroke-width="3" marker-end="url(#p2-arrow)"/>
+    <path d="M300 70 C 300 166, 590 166, 590 172" fill="none" stroke="#157a73" stroke-width="1.6" marker-end="url(#p2-arrow)"/>
+  </g>
+</svg>
+```
+
+[How many ideas, and how much traffic each?]{.fragment .below-note}
+
+[Robert Lehr 1992; the checkout figures from Nicholas Larsen et al. 2024.]{.cite}
+:::
+
+::: {.notes}
+The same visitors as the checkout picture, and the same page, now with the constraint made visible.  [click] One period brings about ten thousand of them.  [click] Problem 1's rule of sixteen: a 5% lift on this page needs about a hundred and thirty thousand per arm, so this crowd can confirm only a lift of about thirty cents a visitor.  [click] And there is not one version of the page.  Pay now, free returns, one-tap, guest checkout, and hundreds more.  [click] A realistic use of the crowd is a split: several ideas, unequal shares, and the rest untested.  The picture is one such split, not a recommendation.  [click] The question is how many ideas, and how much traffic each.
+:::
+
+## The ideas are not exchangeable {background-color="#cdeae7" .content .sec2}
+
+::: {.cbody}
+::: {.incremental}
+- The tidy picture: effects $\theta_j$ are independent draws from one distribution $G$.
+- But each idea carries attributes: the team, the surface, the kind of change, and whether its cousins were tested before.
+- A tweak in a class that has paid off before is not a fresh draw from one urn.
+- Past experiments in a class are a prior for the next, if their history can be trusted.
+:::
+
+[The useful prior is conditional, and built from the experiments we chose to run.]{.fragment .below-note}
+
+[Eduardo Azevedo et al. 2020; Mårten Schultzberg and Mattias Frånberg 2026.]{.cite}
+:::
+
+::: {.notes}
+The tidy modelling assumption is that the ideas are exchangeable: each effect an independent draw from one distribution $G$.  [click] In practice an idea arrives with attributes.  Which team proposed it, which surface it touches, what kind of change it is, and whether similar ideas have been tried.  [click] A change in a category that has paid off before is not a coin flip from a single urn; its prior should depend on its class.  [click] And the past experiments in that class are exactly the data for such a prior, provided the record can be trusted, which is a real worry when the history keeps mostly winners.  [click] So the prior worth having is conditional on attributes, and it is assembled from the very experiments the platform chose to run.
+:::
+
+## Not yet a theorem {background-color="#cdeae7" .content .sec2}
+
+::: {.cbody}
+::: {.incremental}
+- Four choices stand before any optimum:
+  - Objective.  Value shipped, regret, true discoveries, or harm avoided.  Unchosen.
+  - Validated.  The smallest worthwhile effect, and how surely: this sets the minimum sample size.
+  - Prior.  What an idea's attributes and history tell us, if that history can be trusted.
+  - Budget.  Traffic spent on one idea is denied to the rest.
+- Fix all four, drop the attributes, score value by a positive posterior mean, and the published iid problem is one corner of the room.
+:::
+
+[We need to pose the right question and then solve it.]{.fragment .below-note}
+
+[Howard Raiffa and Robert Schlaifer 1961; Eduardo Azevedo et al. 2020.]{.cite}
+:::
+
+::: {.notes}
+Why this is not yet a theorem.  Four things must be fixed before the word 'optimal' means anything.  [click] The objective: do we maximise value shipped, minimise regret in Problem 1's sense, count true discoveries, or bound harm?  Each is a different problem, and we have not chosen.  [click] What 'validated' means: the smallest effect worth shipping and the confidence we want, which together fix the minimum sample size for an idea.  [click] The prior: what an idea's attributes and its class's history tell us in advance, and whether that history, kept by the platform's own choices, can be trusted.  [click] The budget: the one thing coupling the ideas, since traffic spent on one is denied to the rest.  [click] Make every choice the convenient way, independent ideas, value as a positive posterior mean, fixed-size tests, and you recover the published iid problem, with Raiffa and Schlaifer's value of information behind it.  That is one corner of a room we have not mapped.  [click] We need to pose the right question and then solve it.
+:::
+
+## What platforms do {background-color="#cdeae7" .content .sec2}
+
+::: {.cbody}
+::: {.incremental}
+- Ship on a significant win with every guardrail shown non-inferior.
+  - Intersection–union: no correction, but power multiplies: $0.8^5\approx 0.33$.
+- Traffic: orthogonal layers, exclusive lanes, long-term holdouts.
+- Choosing ideas: ICE and RICE scores, velocity targets.
+  - ICE: impact $\times$ confidence $\times$ ease.  RICE adds reach, divides by effort.
+- Base rates: 8–33% of experiments win.
+  - At 10%, 80% power, and two-sided $p<0.05$: 22% of wins are false.
+:::
+
+[Machinery for reading answers.  Conventions for choosing questions.]{.fragment .below-note}
+
+[Ron Kohavi et al. 2020, 2022; Roger Berger 1982; Mårten Schultzberg et al. 2026; Diane Tang et al. 2010.]{.cite}
+:::
+
+::: {.notes}
+Inside an experiment, platforms separate one success metric from guardrails and diagnostics, with tiered or Bonferroni-style corrections for the rest.  'Ship only if every guardrail is shown non-inferior' is an intersection–union test, so Roger Berger tells us no correction is needed; Mårten Schultzberg, Sebastian Ankargren, and Mattias Frånberg at Spotify point out that the cost appears as power: five independent guardrails at 80% pass together a third of the time.  Across experiments, traffic is packed by convention: the orthogonal layers of Diane Tang and colleagues at Google, exclusive lanes, and holdouts.  Ideas are chosen by scoring rules such as ICE, impact times confidence times ease, and RICE, which adds reach and divides by effort, and by velocity targets that count experiments; none contains a statistic, and at Bing, in a small sample of 33 ideas from one team, offline triage showed no evidence of predicting online results.  Base rates are low: at a 10% success rate, 80% power, and the usual two-sided 5% level, counting only significant improvements as wins, more than a fifth of wins are false.
+:::
+
+## A first formulation {background-color="#cdeae7" .content .sec2 .fit .clear}
+
+::: {.cbody}
+::: {.incremental}
+- ICE and RICE already score an idea by value over cost: a bang-per-buck ratio.
+- Make it exact.  A size $s_j$ for idea $j$, or none below the minimum that validates it, $n_j$.
+:::
+
+::: {.fragment}
+$$
+\max_{s_j}\sum_j v_j(s_j)
+\qquad\text{subject to}\qquad
+\sum_j s_j\le N,
+\quad s_j=0\text{ or }s_j\ge n_j.
+$$
+:::
+
+::: {.incremental}
+- Relax the minimum, and one shadow price $\lambda$ sorts: fund $j$ while $v_j'(s_j)\ge\lambda$ — close to ICE and RICE's ranking.
+- [Unanswered:]{.unanswered} What is $v_j$?  A business choice, and an estimate — so $\lambda$ is both.
+:::
+
+[The ranking already exists.  The cutoff, one number, does not.]{.fragment .below-note}
+
+[George Dantzig 1957; Robert Lehr 1992.]{.cite}
+:::
+
+::: {.notes}
+One way to make the existing heuristic exact.  ICE and RICE already rank ideas by value over cost, an index.  [click] Give every idea a size or nothing: nothing below the minimum, the same rule of sixteen, that could validate it.  [click] Written as a programme: maximise total value under one traffic budget, with that threshold built in.  [click] Its optimality condition, once the minimum is relaxed, is a single shadow price $\lambda$ of traffic, the same for every idea: fund an idea while its marginal value still clears $\lambda$.  That ordering is close to what ICE and RICE compute; the number they do not compute is $\lambda$ itself, which says where to stop, not just how to sort.  This is the classical result that a continuous knapsack is solved by sorting on the value-to-cost ratio, George Dantzig 1957.  [click] What is left open: $v_j$, 'value,' is a business judgement, revenue, a strategic bet, user trust, that nothing here supplies, and it is not observed, so $\lambda$ is estimated too.  The next slide is one way to estimate the confidence that judgement still needs.
+:::
+
+## A second formulation {background-color="#cdeae7" .content .sec2 .fit .clear}
+
+::: {.cbody}
+::: {.incremental}
+- ICE's confidence is a guess, scored from 1 to 10.
+- Replace the guess.  Each idea has a class $c_j$; use the conditional mean, learnt from past tests in that class.
+:::
+
+::: {.fragment}
+$$
+\theta_j\mid c_j\sim G_{c_j},
+\qquad
+m_j=\mathbb{E}[\theta_j\mid c_j].
+$$
+:::
+
+::: {.incremental}
+- The knapsack ranks on value built from $m_j$.
+- [Unanswered:]{.unanswered} Is $m_j$ the right number?  It is Bayes for squared error, and the loss is unchosen.
+:::
+
+[The score already exists.  The shrinkage target does not.]{.fragment .below-note}
+
+[Herbert Robbins 1956; Charles Stein 1956.]{.cite}
+:::
+
+::: {.notes}
+ICE already multiplies by a confidence, and that number is a guess between 1 and 10.  [click] Give each idea a class, from the attributes on the earlier slide: the team, the surface, the kind of change.  The confidence becomes the mean of $\theta_j$ given that class, estimated from the past experiments in the class.  Herbert Robbins's empirical Bayes, and Charles Stein's shrinkage, applied to many ideas at once.  [click] That mean is what the knapsack should rank on, in place of the guess.  [click] Whether the mean is the right summary is open: it is the Bayes rule for squared error, and we have not chosen the loss.  The history that estimates it is the loop on the next slide.  [click] The score is already on the platform.  What is missing is the shrinkage target.
+:::
+
+## [Unanswered:]{.unanswered} The budget, the loop, the harm {background-color="#cdeae7" .content .sec2 .fit .clear}
+
+::: {.cbody}
+::: {.incremental}
+- Budget.  Define "validated" — the smallest worthwhile effect, at a stated confidence — then choose sizes with $\sum_j s_j\le N$.
+  - Optimal selection is open — more so adaptive, not fixed upfront, and with side information.
+- Loop.  A fitted prior $\hat G$ chooses which ideas get data, and how much.
+  - With a misspecified family on a winner-selected history, can $\hat G$ settle on a lasting misallocation?
+- Harm.  Online FDR counts false launches, not the harm per launch.
+  - Anytime-valid control of harm shipped, $\mathbb{E}\sum_j\theta_j^-\mathbf 1\{\text{ship}_j\}$?
+:::
+
+[Why industry cares: traffic misspent, or a harmful idea shipped unflagged, is dollars left on the table.]{.fragment .below-note}
+
+[Timothy Sudijono et al. 2025; Sven Schmit et al. 2019; Ignacio Esponda and Demian Pouzo 2016.]{.cite}
+:::
+
+::: {.notes}
+Three open questions: the budget, the loop, and the harm.  The budget: once we say what 'validated' means — the smallest worthwhile effect at a stated confidence, which fixes a minimum sample size for each idea — we must choose sizes under one traffic constraint; the optimal selection is open, and more so when ideas carry attributes.  Timothy Sudijono and colleagues at Netflix list sequential portfolios as open, and Sven Schmit, Virag Shah, and Ramesh Johari found a 'paradox of power' in a related model.  The loop: the prior is fitted to experiments the platform itself chose and stopped, so a misspecified family converges to what Ignacio Esponda and Demian Pouzo call a Berk–Nash equilibrium, and Mårten Schultzberg and Mattias Frånberg show that winner-only corpora and unrecorded restarts can prevent calibration regardless of how much history we gather.  The harm: online FDR counts a 0.01% harm and a 2% harm once each, so controlling harm shipped — the expected sum of downside over launches — is the online cousin of Problem 1's regret, and anytime-valid control of it is open.  [click] Why industry cares: traffic misspent, or a harmful idea shipped unflagged, is dollars left on the table.
+:::
